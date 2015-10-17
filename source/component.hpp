@@ -4,14 +4,18 @@
 
 #include <string>
 
-template < class componentType >
+template < typename componentType >
 
 class cComponent
 {
 	friend class componentHandler;
 	std::string name;
 	componentType value;
-	cComponent();
-}
+	operator componentType();
+	public:
+	componentType returnValue();
+	componentType setValue();
+	cComponent( std::string _name, componentType _value );
+};
 
 #endif

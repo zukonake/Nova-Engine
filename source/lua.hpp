@@ -2,6 +2,8 @@
 #ifndef LUA_HPP
 #define LUA_HPP
 
+#include <string>
+
 extern "C" 
 {
 	#include "lua.h"
@@ -9,9 +11,14 @@ extern "C"
 	#include "lauxlib.h"
 }
 
+template < typename variableType >
 class cLua
 {
 	lua_state *L;
+	std::string fileName;
+	variableType getVariable( std::string variableName );
+	variableType runFunction( std::string functionName );
+	bool openScript( std::string fileName );
 	cLua();
 	~cLua();
 }
