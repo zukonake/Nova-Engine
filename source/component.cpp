@@ -14,15 +14,9 @@ componentType cComponent< componentType >::returnValue()
 }
 
 template < typename componentType >
-componentType cComponent< componentType >::setValue( componentType _value )
-{
-	value = _value;
-}
-
 cComponent<componentType>::cComponent( std::string _name, componentType _value ) :
 	name( _name ),
 	value( _value )
 {
 	
 }
-

@@ -4,17 +4,22 @@
 
 #include <string>
 
-template < typename componentType >
-
-class cComponent
+class cComponentInterface
 {
-	friend class componentHandler;
+	public:
+	virtual bool someFunction() { return true;}
+};
+
+template < typename componentType >
+class cComponent : public cComponentInterface
+{
+	public:
 	std::string name;
 	componentType value;
 	operator componentType();
 	public:
 	componentType returnValue();
-	componentType setValue();
+	bool someFunction() { return false;}
 	cComponent( std::string _name, componentType _value );
 };
 

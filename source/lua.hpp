@@ -17,6 +17,7 @@ class cLua
 	lua_state *L;
 	std::string fileName;
 	variableType getVariable( std::string variableName );
+	variableType getTable( std::string tableName );
 	variableType runFunction( std::string functionName );
 	bool openScript( std::string fileName );
 	cLua();
