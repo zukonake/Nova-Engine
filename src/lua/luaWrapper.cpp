@@ -2,8 +2,9 @@
 #include "luaWrapper.hpp"
 
 template < typename variableType >
-variableType cLuaWrapperWrapper::convertVariable( int index )
+variableType cLuaWrapper::getVariable( std::string variableName )
 {
+	lua_getglobal( L, variableName );
 	if( lua_isboolean( L, index ) )
 	{
 		return ( bool )lua_tobool( L, index );
@@ -14,34 +15,46 @@ variableType cLuaWrapperWrapper::convertVariable( int index )
 	}
 	else if( lua_isnumber( L, index ) )
 	{
-		return ( int )lua_tointeger( L, index );
+		return ( lua_Number )lua_tonumber( L, index );
 	}
-	return NULL;
+	else
+	{
+		return NULL;
+	}
 }
 
-template < typename variableType >
-variableType cLuaWrapperWrapper::getVariable( std::string variableName )
+cLuaTable cLuaWrapper::getTable( std::string tableName ) // I think it should work...
 {
-	lua_getglobal( L, variableName );
-	return convertVariable< variableType >( -1 );
-}
-//TODO
-template < typename vectorType>
-cComponentHandler getTable( std::string tableName )
-{
-	lua_pushstring( l, tablename )
-	lua_gettable( l, 1 )
+	lua_pushstring( l, tablename );
+	lua_gettable( l, 1 );
 	lua_pushnil( L );
+	cLuaTable target;
 	while ( lua_next( L, -2 ) != 0 ) 
 	{
 		std::string key = lua_tostring( L, -2 );
-		switch( lua_type( L, -1 ) )
+		if( lua_isboolean( L, -1 ) )
 		{
-			case LUA_TSTRING:
+			target.synchronizeEntry< bool >( cLuaTableEntry< bool >( key, lua_tobool( L, -1 ) ) );
+		}
+		else if( lua_isstring( L, -1 ) )
+		{
+			target.synchronizeEntry< std::string >( cLuaTableEntry< std::string >( key, lua_tostring( L, -1 ) ) );
+		}
+		else if( lua_isnumber( L, -1 ) )
+		{
+			target.synchronizeEntry< lua_Number >( cLuaTableEntry< lua_Number >( key, lua_tonumber( L, -1 ) ) );
+		}
+		else if( lua_istable( L, -1 ) )
+		{
+			target.synchronizeEntry< cLuaTable >( cLuaTableEntry< cLuaTable >( key, getTable( tableName + key ) );
+		}
+		else
+		{
+			return NULL; //invalid table
 		}
 	}
 	lua_pop( L, 1 ); 
-	return
+	return target;
 }
 
 /* TODO

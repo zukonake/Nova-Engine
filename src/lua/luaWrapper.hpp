@@ -15,14 +15,12 @@ extern "C"
 
 class cLuaWrapper
 {
+	friend class cInitializer;
 	lua_state *L;
-	std::string fileName;
-	template < typename variableType >
-	variableType convertVariable( int index );
+	public:
 	template < typename variableType >
 	variableType getVariable( std::string variableName );
-	template < typename variableType >
-	variableType getTable( std::string tableName );
+	cLuaTable getTable( std::string tableName );
 	template < typename variableType >
 	variableType runFunction( std::string functionName );
 	bool openScript( std::string fileName );

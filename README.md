@@ -2,11 +2,10 @@
 Widely customizable roguelike game engine.
 Gameplay defined with use of lua.
 
-==========
-
 # Development
 Extremely WIP. Haven't even built it yet. Stay tuned.
-If anyone is willing to contribute then go on, it would be faster to work in a group.
+If anyone is willing to contribute then go on,
+it would be faster to work in a group.
 
 # Copying
 Copyright (C) 2015 zukonake
