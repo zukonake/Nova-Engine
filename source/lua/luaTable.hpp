@@ -1,19 +1,15 @@
-//lua.hpp
-#ifndef LUA_HPP
-#define LUA_HPP
+//luaTable.hpp
+#ifndef LUATABLE_HPP
+#define LUATABLE_HPP
 
 #include <string>
-
-extern "C" 
-{
-	#include "lua.h"
-	#include "lualib.h"
-	#include "lauxlib.h"
-}
+#include <vector>
+#include <memory>
+#include <cstdint>
 
 class cLuaTableEntryInterface
 {
-	//Interface
+	//Supposed to be blank
 };
 
 template < typename valueType >
@@ -47,23 +43,5 @@ class cLuaTable
 	cLuaTable( std::vector< std::unique_ptr< cLuaTableEntryInterface* > _table );
 	cLuaTable();
 };
-
-class cLua
-{
-	lua_state *L;
-	std::string fileName;
-	template < typename variableType >
-	variableType convertVariable( int index );
-	template < typename variableType >
-	variableType getVariable( std::string variableName );
-	template < typename variableType >
-	variableType getTable( std::string tableName );
-	template < typename variableType >
-	variableType runFunction( std::string functionName );
-	bool openScript( std::string fileName );
-	cLua();
-	~cLua();
-}
-
 
 #endif
