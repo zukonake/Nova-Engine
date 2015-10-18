@@ -3,19 +3,6 @@
 #include "componentHandler.hpp"
 
 template < typename componentType >
-int16_t returnComponentIndex( std::string componentName )
-{
-	for( uint16_t i = 0; i < componentList.size(); i++ )
-	{
-		if( static_cast< cComponent< componentType >* >( componentList[i] )->name == componentName )
-		{
-			return i;
-		}
-	}
-	return -1;
-}
-
-template < typename componentType >
 bool isComponentPresent( std::string componentName )
 {
 	if( returnComponentIndex< componentType >( componentName ) == -1 )
