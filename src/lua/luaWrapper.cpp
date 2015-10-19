@@ -70,13 +70,6 @@ variableType cLuaWrapper::convertVariable( int luaIndex )
 	}
 }
 
-cLuaTable cLuaWrapper::getTable( std::string tableName ) // I think it should work...
-{
-	lua_pushstring( l, tablename );
-	lua_gettable( l, 1 );
-	return convertTable()
-}
-
 template < typename variableType >
 variableType cLuaWrapper::getVariable( std::string variableName )
 {

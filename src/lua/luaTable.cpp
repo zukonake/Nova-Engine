@@ -80,6 +80,11 @@ bool cLuaTable::deleteEntry( std::string entryKey )
 	}
 }
 
+uint16_t cLuaTable::size()
+{
+	return ( uint16_t )table.size();
+}
+
 template < typename valueType >
 valueType* cLuaTable::returnEntryValue( std::string entryKey )
 {

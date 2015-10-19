@@ -17,7 +17,7 @@ class cLuaTableEntry : private cLuaTableEntryInterface
 {
 	friend class cLuaTable;
 	protected:
-	std::string key;
+	valueType key;
 	valueType value;
 	public:
 	std::string returnKey();
@@ -38,6 +38,7 @@ class cLuaTable
 	bool isEntryPresent( std::string entryKey );
 	template < typename valueType >
 	bool deleteEntry( std::string entryKey );
+	uint16_t size();
 	template < typename valueType >
 	valueType* returnEntryValue( std::string entryKey );
 	cLuaTable( std::vector< std::unique_ptr< cLuaTableEntryInterface* > _table );
