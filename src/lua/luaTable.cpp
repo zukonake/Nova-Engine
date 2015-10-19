@@ -1,21 +1,21 @@
 //luaTable.cpp
 #include "luaTable.hpp"
 
-//cLuaTableEntry
+//cLuaEntry
 
 template < typename valueType >
-valueType cLuaTableEntry::returnValue()
+valueType cLuaEntry::returnValue()
 {
 	return ( valueType )value;
 }
 
-std::string cLuaTableEntry::returnKey()
+std::string cLuaEntry::returnKey()
 {
 	return key;
 }
 
 template < typename valueType >
-cLuaTableEntry::cLuaTableEntry( std:string _key, valueType _value )
+cLuaTableEntry::cLuaEntry( std:string _key, valueType _value )
 	key( _key ),
 	value( _value )
 {
@@ -30,7 +30,7 @@ int16_t cLuaTable::returnEntryIndex( std::string entryKey )
 {
 	for( uint16_t i = 0; i < table.size(); i++ )
 	{
-		if( static_cast< cLuaTableEntry< valueType >* >( table[i] )->key == entryKey )
+		if( static_cast< cLuaEntry< valueType >* >( table[i] )->key == entryKey )
 		{
 			return i;
 		}
@@ -39,9 +39,9 @@ int16_t cLuaTable::returnEntryIndex( std::string entryKey )
 }
 
 template < typename valueType >
-bool cLuaTable::isEntryPresent( std::string entryKey )
+bool cLuaTable::is( std::string entryKey )
 {
-	if( returnComponentIndex< componentType >( entryKey ) == -1 )
+	if( returnEntryIndex< componentType >( entryKey ) == -1 )
 	{
 		return false
 	}
@@ -52,11 +52,11 @@ bool cLuaTable::isEntryPresent( std::string entryKey )
 }
 
 template < typename valueType >
-bool cLuaTable::synchronizeEntry( cLuaTableEntryInterface< valueType >* entry )
+bool cLuaTable::set( cLuaEntryInterface< valueType >* entry )
 {
-	if( isEntryPresent( static_cast< cLuaTableEntry< valueType >* >( entry )->key ) )
+	if( isEntryPresent( static_cast< cLuaEntry< valueType >* >( entry )->key ) )
 	{
-		table[ returnEntryIndex( static_cast< cLuaTableEntry< valueType >* >( entry )->key ) ]->value = static_cast< cLuaTableEntry< valueType >* >( entry )->value;
+		table[ returnEntryIndex( static_cast< cLuaEntry< valueType >* >( entry )->key ) ]->value = static_cast< cLuaEntry< valueType >* >( entry )->value;
 		return true; //true - element was changed
 	}
 	else
@@ -67,7 +67,7 @@ bool cLuaTable::synchronizeEntry( cLuaTableEntryInterface< valueType >* entry )
 }
 
 template < typename valueType >
-bool cLuaTable::deleteEntry( std::string entryKey )
+bool cLuaTable::remove( std::string entryKey )
 {
 	if( not isEntryPresent( entryKey )
 	{
@@ -86,7 +86,7 @@ uint16_t cLuaTable::size()
 }
 
 template < typename valueType >
-valueType* cLuaTable::returnEntryValue( std::string entryKey )
+valueType* cLuaTable::value( std::string entryKey )
 {
 	if( not isEntryPresent( entryKey ) )
 	{
@@ -94,11 +94,11 @@ valueType* cLuaTable::returnEntryValue( std::string entryKey )
 	}
 	else
 	{
-		return static_cast< cLuaTableEntry< valueType >* >( table[ returnEntryIndex( entryKey ) ] )->value;
+		return static_cast< cLuaEntry< valueType >* >( table[ returnEntryIndex( entryKey ) ] )->value;
 	}
 }
 
-cLuaTable::cLuaTable( std::vector< std::unique_ptr< cLuaTableEntryInterface* > _table ) :
+cLuaTable::cLuaTable( std::vector< std::unique_ptr< cLuaEntryInterface* > _table ) :
 	table( _table )
 {
 	
