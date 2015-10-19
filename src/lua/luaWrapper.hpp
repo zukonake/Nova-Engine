@@ -3,6 +3,7 @@
 #define LUAWRAPPER_HPP
 
 #include <string>
+#include <vector>
 
 extern "C" 
 {
@@ -21,7 +22,9 @@ class cLuaWrapper
 	template < typename variableType >
 	variableType convertVariable( int luaIndex );
 	public:
-	cLuaTable getTable( std::string tableName );
+	cLuaTable getTable( std::string tableName ); // Might be deleted due to getVariable()
+	template < typename variableType >
+	std::vector< variableType > getArray(); // Same as above, also TODO TODO TODO
 	template < typename variableType >
 	variableType getVariable( std::string variableName );
 	template < typename variableType >
