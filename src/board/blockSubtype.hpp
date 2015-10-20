@@ -9,7 +9,7 @@ class cBlockSubtype
 	friend class cBlock
 	std::string name;
 	bool isPassable;
-	cTileSubtype( std::string _name, bool _isPassable )
+	cBlockSubtype( std::string _name, bool _isPassable )
 }
 
 #endif

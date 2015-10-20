@@ -10,7 +10,7 @@ class cTile
 	char base;
 	uint8_t foregroundColor;
 	uint8_t backgroundColor;
-	cSprite( char _base, uint8_t _foregroundColor, uint8_t _backgroundColor);
+	cTile( char _base, uint8_t _foregroundColor, uint8_t _backgroundColor);
 }
 
 #endif

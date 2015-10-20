@@ -2,7 +2,7 @@
 #ifndef BLOCK_HPP
 #define BLOCK_HPP
 
-#include <cstdin>
+#include <cstdint>
 #include <string>
 
 #include "tile.hpp"
@@ -12,9 +12,9 @@ class cBlock
 {
 	friend class cBoard;
 	cTile* tile;
-	cBlockSubtype* blockSubtype;
+	cBlockSubtype* subtype;
 	uint8_t height;
-	cTile( cTile* _tile, cBlockSubtype* _blockSubtype, uint8_t _height )
+	cBlock( cTile* _tile, cBlockSubtype* _subtype, uint8_t _height )
 }
 
 #endif
