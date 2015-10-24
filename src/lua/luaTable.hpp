@@ -20,29 +20,31 @@ class cLuaEntry : private cLuaEntryInterface
 	valueType key;
 	valueType value;
 	public:
-	std::string returnKey();
-	valueType returnValue();
+	std::string getKey( void );
+	valueType getValue( void );
+	void setValue( valueType );
 	cLuaEntry( std::string _key, valueType _value );
 };
 
-class cLuaTable
+class cLuaTable 
 {
+	private:
+	std::vector< std::unique_ptr< cLuaEntryInterface > table;
 	protected:
-	std::vector < std::unique_ptr< cLuaEntryInterface* > table;
 	template < typename valueType >
 	int16_t returnEntryIndex( std::string entryKey );
 	public:
 	template < typename valueType >
-	bool set( cLuaTableEntry< valueType >* entry );
+	bool set( cLuaEntryInterface< valueType >* entry );
 	template < typename valueType >
-	bool is( std::string entryKey );
+	 bool is( std::string entryKey );
 	template < typename valueType >
 	bool remove( std::string entryKey );
 	uint16_t size();
 	template < typename valueType >
-	valueType* value( std::string entryKey );
-	cLuaTable( std::vector< std::unique_ptr< cLuaEntryInterface* > _table );
-	cLuaTable();
+	valueType* get( std::string entryKey );
+	cLuaTable( std::vector< std::unique_ptr< cLuaEntryInterface > > _table );
+	cLuaTable( void );
 };
 
 #endif

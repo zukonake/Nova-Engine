@@ -3,19 +3,22 @@
 
 //cLuaEntry
 
-template < typename valueType >
-valueType cLuaEntry::returnValue()
+valueType cLuaEntry::getValue( void )
 {
 	return ( valueType )value;
 }
 
-std::string cLuaEntry::returnKey()
+std::string cLuaEntry::getKey( void )
 {
 	return key;
 }
 
-template < typename valueType >
-cLuaTableEntry::cLuaEntry( std:string _key, valueType _value )
+void cLuaEntry::setKey( void )
+{
+	
+}
+
+cLuaEntry::cLuaEntry( std:string _key, valueType _value )
 	key( _key ),
 	value( _value )
 {
@@ -30,7 +33,7 @@ int16_t cLuaTable::returnEntryIndex( std::string entryKey )
 {
 	for( uint16_t i = 0; i < table.size(); i++ )
 	{
-		if( static_cast< cLuaEntry< valueType >* >( table[i] )->key == entryKey )
+		if( static_cast< cLuaEntry< valueType >* >( table[i] )->getKey == entryKey )
 		{
 			return i;
 		}
@@ -41,7 +44,7 @@ int16_t cLuaTable::returnEntryIndex( std::string entryKey )
 template < typename valueType >
 bool cLuaTable::is( std::string entryKey )
 {
-	if( returnEntryIndex< componentType >( entryKey ) == -1 )
+	if( returnEntryIndex< valueType >( entryKey ) == -1 )
 	{
 		return false
 	}
@@ -54,9 +57,9 @@ bool cLuaTable::is( std::string entryKey )
 template < typename valueType >
 bool cLuaTable::set( cLuaEntryInterface< valueType >* entry )
 {
-	if( isEntryPresent( static_cast< cLuaEntry< valueType >* >( entry )->key ) )
+	if( isEntryPresent< valueType >( static_cast< cLuaEntry< valueType >* >( entry )->getKey() ) )
 	{
-		table[ returnEntryIndex( static_cast< cLuaEntry< valueType >* >( entry )->key ) ]->value = static_cast< cLuaEntry< valueType >* >( entry )->value;
+		table[ returnEntryIndex( static_cast< cLuaEntry< valueType >* >( entry )->key ) ]->setValue( static_cast< cLuaEntry< valueType >* >( entry )->getValue );
 		return true; //true - element was changed
 	}
 	else
@@ -69,13 +72,13 @@ bool cLuaTable::set( cLuaEntryInterface< valueType >* entry )
 template < typename valueType >
 bool cLuaTable::remove( std::string entryKey )
 {
-	if( not isEntryPresent( entryKey )
+	if( not isEntryPresent< valueType >( entryKey )
 	{
 		return false;
 	}
 	else
 	{
-		table.erase( returnEntryIndex( entryKey ) );
+		table.erase< valueType >( returnEntryIndex< valueType >( entryKey ) );
 		return true;
 	}
 }
@@ -86,7 +89,7 @@ uint16_t cLuaTable::size()
 }
 
 template < typename valueType >
-valueType* cLuaTable::value( std::string entryKey )
+valueType* cLuaTable::get( std::string entryKey )
 {
 	if( not isEntryPresent( entryKey ) )
 	{
@@ -94,11 +97,11 @@ valueType* cLuaTable::value( std::string entryKey )
 	}
 	else
 	{
-		return static_cast< cLuaEntry< valueType >* >( table[ returnEntryIndex( entryKey ) ] )->value;
+		return static_cast< cLuaEntry< valueType >* >( table[ returnEntryIndex( entryKey ) ] )->getValue();
 	}
 }
 
-cLuaTable::cLuaTable( std::vector< std::unique_ptr< cLuaEntryInterface* > _table ) :
+cLuaTable::cLuaTable( std::vector< std::unique_ptr< cLuaEntryInterface > > _table ) :
 	table( _table )
 {
 	

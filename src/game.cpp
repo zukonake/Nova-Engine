@@ -16,6 +16,14 @@
 
 void cGame::initializeObjects()
 {
+	objectList.set< std::vector< cTile* >* >( cLuaEntry( "tile", new std::vector< cTile* >() );
+	objectList.set< std::vector< cBlockSubtype* >* >( cLuaEntry( "blockSubtype", new std::vector< cBlockSubtype* >() );
+	objectList.set< std::vector< cBlock* >* >( cLuaEntry( "block", new std::vector< cBlock* >() );
+	objectList.set< std::vector< cInterface* >* >( cLuaEntry( "interface", new std::vector< cInterface* >() );
+	objectList.set< std::vector< cBoardGenerator* >* >( cLuaEntry( "boardGenerator", new std::vector< cBoardGenerator* >() );
+	objectList.set< std::vector< cBoard* >* >( cLuaEntry( "board", new std::vector< cBoard* >() );
+	objectList.set< std::vector< cEntity* >* >( cLuaEntry( "entity", new std::vector< cEntity* >() );
+	objectList.set< std::vector< cEntityControl* >* >( cLuaEntry( "entityControl", new std::vector< cEntityControl* >() );
 	//working dir is probably bin/debug or bin/release depending on situation so ../../ fits
 	luaWrapper = cLuaWrapper();
 	luaWrapper.openScript( global::configPath + "config.lua" );
@@ -32,39 +40,39 @@ void cGame::initializeObjects()
 			std::string tableName = luaWrapper.getTable( fileList[ iA ].substr( 0, fileList[ iA ].size() - 4 ) ); //filename without .lua
 			if( objectsToLoad[ i ] == "tile" )
 			{
-				tileList.push_back( new cTile( luaWrapper.getTable( tableName ) ) );
+				objectList.get( "tile" )->push_back( new cTile( luaWrapper.getTable( tableName ) ) );
 			}
 			else if( objectsToLoad[ i ] == "blockSubtype" )
 			{
-				blockSubtypeList.push_back( new cBlockSubtype( luaWrapper.getTable( tableName ) ) );
+				objectList.get( "blockSubtype" )->push_back( new cBlockSubtype( luaWrapper.getTable( tableName ) ) );
 			}
 			else if( objectsToLoad[ i ] == "block" )
 			{
-				blockList.push_back( new cBlock( luaWrapper.getTable( tableName ) ) );
+				objectList.get( "block" )->push_back( new cBlock( luaWrapper.getTable( tableName ) ) );
 			}
 			else if( objectsToLoad[ i ] == "interface" )
 			{
-				interfaceList.push_back( new cInterface( luaWrapper.getTable( tableName ) ) );
+				objectList.get( "interface" )->push_back( new cInterface( luaWrapper.getTable( tableName ) ) );
 			}
 			else if( objectsToLoad[ i ] == "boardGenerator" )
 			{
-				boardGeneratorList.push_back( new cBoardGenerator( luaWrapper.getTable( tableName ) ) );
+				objectList.get( "boardGenerator" )->push_back( new cBoardGenerator( luaWrapper.getTable( tableName ) ) );
 			}
 			else if( objectsToLoad[ i ] == "board" )
 			{
-				boardList.push_back( new cBoard( luaWrapper.getTable( tableName ) ) );
+				objectList.get( "board" )->push_back( new cBoard( luaWrapper.getTable( tableName ) ) );
 			}
 			else if( objectsToLoad[ i ] == "entitySubtype" )
 			{
-				entitySubtypeList.push_back( new cEntitySubtype( luaWrapper.getTable( tableName ) ) );
+				objectList.get( "entitySubtype" )->push_back( new cEntitySubtype( luaWrapper.getTable( tableName ) ) );
 			}
 			else if( objectsToLoad[ i ] == "entity" )
 			{
-				entityList.push_back( new cEntity( luaWrapper.getTable( tableName ) ) );
+				objectList.get( "entity" )->push_back( new cEntity( luaWrapper.getTable( tableName ) ) );
 			}
 			else if( objectsToLoad[ i ] == "entityControl" )
 			{
-				entityControlList.push_back( new cEntityControl( luaWrapper.getTable( tableName ) ) );
+				objectList.get( "entityControl" )->push_back( new cEntityControl( luaWrapper.getTable( tableName ) ) );
 			}
 		}
 	}
