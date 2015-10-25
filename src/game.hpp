@@ -2,15 +2,12 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include <vector>
-#include <string>
-#include <map>
-#include <boost/any.hpp>
+#include "typedef.hpp"
 
 class cGame
 {
 	void initializeObjects();
-	std::map< std::string, std::vector< boost::any >* > objectList;
+	table* objectTable;
 	cGame();
 };
 

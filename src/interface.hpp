@@ -1,18 +1,26 @@
 //interface.hpp
 #ifndef INTERFACE_HPP
 #define INTERFACE_HPP
-#include <vector>
 #include <ncurses.h>
-#include "lua/luaTable.hpp"
+#include "typedef.hpp"
 
 class cInterface
 {
-	std::string name;
-	luaTable componentList;
-	WINDOW* nCursesWindow;
+	table componentTable;
+	uint posX;
+	uint posY;
+	uint width;
+	uint height;
+	WINDOW* window;
+	char hBorder;
+	char vBorder;
+	public:
 	void print();
-	// void refresh(); not sure if needed
-	cInterface( cLuaTable _componentList, std::string _name, uint16_t _posX, uint16_t _posY, uint16_t _width, uint16_t _height, char _hBorder, char _vBorder );
+	void clear();
+	void refresh();
+	cInterface( table luaToCpp, table* objectList );
+	cInterface( table _componentTable, uint _posX, uint _posY, uint _width, uint _height, char _hBorder, char _vBorder );
+	~cInterface();
 };
 
 #endif

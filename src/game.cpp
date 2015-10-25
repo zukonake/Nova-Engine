@@ -1,5 +1,6 @@
 //game.cpp
 #include "game.hpp"
+#include "typedef.hpp"
 #include "lua/luaWrapper.hpp"
 #include "global.hpp"
 #include "game.hpp"
@@ -15,14 +16,14 @@
 
 void cGame::initializeObjects()
 {
-	objectList.insert( "tile", new std::vector< cTile* >() );
-	objectList.insert( "blockSubtype", new std::vector< cBlockSubtype* >() );
-	objectList.insert( "block", new std::vector< cBlock* >() );
-	objectList.insert( "interface", new std::vector< cInterface* >() );
-	objectList.insert( "boardGenerator", new std::vector< cBoardGenerator* >() );
-	objectList.insert( "board", new std::vector< cBoard* >() );
-	objectList.insert( "entity", new std::vector< cEntity* >() );
-	objectList.insert( "entityControl", new std::vector< cEntityControl* >() );
+	objectTable.insert( std::pair< std::string, table >( "tile", new table ) );
+	objectTable.insert( std::pair< std::string, table >( "blockSubtype", new table ) ); 
+	objectTable.insert( std::pair< std::string, table >( "block", new table ) );
+	objectTable.insert( std::pair< std::string, table >( "interface", new table ) );
+	objectTable.insert( std::pair< std::string, table >( "boardGenerator", new table ) );
+	objectTable.insert( std::pair< std::string, table >( "board", new table ) );
+	objectTable.insert( std::pair< std::string, table >( "entity", new table ) );
+	objectTable.insert( std::pair< std::string, table >( "entityControl", new table ) ); 
 	//working dir is probably bin/debug or bin/release depending on situation so ../../ fits
 	luaWrapper = cLuaWrapper();
 	luaWrapper.openScript( global::configPath + "config.lua" );
@@ -32,46 +33,47 @@ void cGame::initializeObjects()
 	luaWrapper.openScript( extPath + "lua/listFiles.lua" );
 	for( uint16_t i = 0; i < objectsToLoad.size(); i++ )
 	{
-		std::vector< std::string >fileList = luaWrapper.runFunction< std::vector< std::string > >( "listFiles", global::configPath + "dataset/" + datasetPath + objectsToLoad[ i ] );
+		std::vector< std::string > fileList = luaWrapper.runFunction< std::vector< std::string > >( "listFiles", global::configPath + "dataset/" + datasetPath + objectsToLoad[ i ] );
 		for( uint16_t iA = 0; iA < fileList.size(); iA++ )
 		{
 			luaWrapper.openScript( global::configPath + "dataset/" + datasetPath + objectsToLoad[ i ] + fileList[ iA ] );
 			std::string tableName = luaWrapper.getGlobal< std::string >( fileList[ iA ].substr( 0, fileList[ iA ].size() - 4 ) ); //filename without .lua
+			table luaToCpp = luaWrapper.getGlobal< table >( tableName );
 			if( objectsToLoad[ i ] == "tile" )
 			{
-				objectList[ "tile" ]->push_back( new cTile( luaWrapper.getGlobal< std::map< std::string, boost::any >( tableName ) ), &objectList );
+				objectTable[ "tile" ][ tableName ] = new cTile( luaToCpp, &objectTable );
 			}
 			else if( objectsToLoad[ i ] == "blockSubtype" )
 			{
-				objectList[ "blockSubtype" ]->push_back( new cBlockSubtype( luaWrapper.getGlobal< std::map< std::string, boost::any >( tableName ) ), &objectList );
+				objectTable[ "blockSubtype" ][ tableName ] = new cBlockSubtype( luaToCpp, &objectTable );
 			}
 			else if( objectsToLoad[ i ] == "block" )
 			{
-				objectList[ "block" ]->push_back( new cBlock( luaWrapper.getGlobal< std::map< std::string, boost::any >( tableName ) ), &objectList );
+				objectTable[ "block" ][ tableName ] = new cBlock( luaToCpp, &objectTable );
 			}
 			else if( objectsToLoad[ i ] == "interface" )
 			{
-				objectList[ "interface" ]->push_back( new cInterface( luaWrapper.getGlobal< std::map< std::string, boost::any >( tableName ) ), &objectList );
+				objectTable[ "interface" ][ tableName ] = new cInterface( luaToCpp, &objectTable );
 			}
 			else if( objectsToLoad[ i ] == "boardGenerator" )
 			{
-				objectList[ "boardGenerator" ]->push_back( new cBoardGenerator( luaWrapper.getGlobal< std::map< std::string, boost::any >( tableName ) ), &objectList );
+				objectTable[ "boardGenerator" ][ tableName ] = new cBoardGenerator( luaToCpp, &objectTable );
 			}
 			else if( objectsToLoad[ i ] == "board" )
 			{
-				objectList[ "board" ]->push_back( new cBoard( luaWrapper.getGlobal< std::map< std::string, boost::any >( tableName ) ), &objectList );
+				objectTable[ "board" ][ tableName ] = new cBoard( luaToCpp, &objectTable );
 			}
 			else if( objectsToLoad[ i ] == "entitySubtype" )
 			{
-				objectList[ "entitySubtype" ]->push_back( new cEntitySubtype( luaWrapper.getGlobal< std::map< std::string, boost::any >( tableName ) ), &objectList );
+				objectTable[ "entitySubtype" ][ tableName ] = new cEntitySubtype( luaToCpp, &objectTable );
 			}
 			else if( objectsToLoad[ i ] == "entityControl" )
 			{
-				objectList[ "entityControl" ]->push_back( new cEntityControl( luaWrapper.getGlobal< std::map< std::string, boost::any >( tableName ) ), &objectList );
+				objectTable[ "entityControl" ][ tableName ] = new cEntityControl( luaToCpp, &objectTable );
 			}
 			else if( objectsToLoad[ i ] == "entity" )
 			{
-				objectList[ "entity" ]->push_back( new cEntity( luaWrapper.getGlobal< std::map< std::string, boost::any >( tableName ) ) , &objectList );
+				objectTable[ "entity" ][ tableName ] = new cEntity( luaToCpp, &objectTable );
 			}
 		}
 	}
