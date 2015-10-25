@@ -4,6 +4,8 @@
 
 #include <string>
 #include <vector>
+#include <map>
+#include <boost/any.hpp>
 
 extern "C" 
 {
@@ -18,12 +20,14 @@ class cLuaWrapper
 {
 	friend class cInitializer;
 	lua_state *L;
-	cLuaTable convertTable();
+	void error( std::string message );
+	std::map< std::string, boost::any > convertTable();
+	std::vector< boost::any > convertTableToArray( std::map< std::string, boost::any >* table );
 	template < typename variableType >
 	variableType convertVariable( int luaIndex );
 	public:
 	template < typename variableType >
-	variableType getVariable( std::string variableName );
+	variableType getGlobal( std::string variableName );
 	template < typename variableType >
 	variableType runFunction( std::string functionName, std::string argument );
 	bool openScript( std::string fileName );

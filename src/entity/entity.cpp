@@ -16,13 +16,13 @@ bool cEntity::move( uint16_t targetPosX, uint16_t targetPosY );
 }
 
 cEntity::cEntity( cLuaTable luaToCpp, cLuaTable* objectList ) :
-	board( objectList->get( "board" )->get( luaToCpp.get< std::string >( "board" ) ) ),
-	subtype( objectList->get( "entitySubtype" )->get( luaToCpp.get< std::string >( "subtype" ) ) ),
-	control( objectList->get( "entityControl" )->get( luaToCpp.get< std::string >( "control" ) ) ),
-	posX( luaToCpp.get< uint16_t >( "posX" ) ),
-	posY( luaToCpp.get< uint16_t >( "posY" ) ),
-	name( luaToCpp.get< std::string >( "name" ) ),
-	componentList( luaToCpp.get< cLuaTable >( "component" ) )
+	board( boost::any_cast< cBoard* >( objectList[ "board" ][ luaToCpp[ "board" ] ] ) ),
+	subtype( boost::any_cast< cEntitySubtype >( objectList[ "entitySubtype" ][ luaToCpp[ "subtype" ] ] ) ),
+	control( boost::any_cast< cEntityControl >( objectList[ "entityControl" ][ luaToCpp[ "control" ] ] ) ),
+	posX( boost::any_cast< uint16_t >( luaToCpp[ "posX" ] ) ),
+	posY( boost::any_cast< uint16_t >( luaToCpp[ "posY" ] ) ),
+	name( boost::any_cast< std::string >( luaToCpp[ "name" ] ) ),
+	componentList( boost::any_cast< std::map< std::string, boost::any > >(luaToCpp[ "component" ] ) )
 {
 	
 }

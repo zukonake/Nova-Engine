@@ -1,77 +1,152 @@
 //luaWrapper.cpp
 #include "luaWrapper.hpp"
 
-cLuaTable cLuaWrapper::convertTable()
+void cLuaWrapper::error( std::string message = std::string("") )
+{
+	lua_pushstring( L, message );
+	lua_error( L );
+}
+
+std::map< std::string, boost::any > cLuaWrapper::convertTable()
 {
 	lua_pushnil( L );
-	cLuaTable target;
+	std::map< std::string, boost::any > target;
 	while ( lua_next( L, -2 ) != 0 ) 
 	{
 		std::string key = lua_tostring( L, -2 );
 		if( lua_isboolean( L, -1 ) )
 		{
-			target.synchronizeEntry< bool >( cLuaTableEntry< bool >( key, lua_tobool( L, -1 ) ) );
+			target.insert( key, ( bool )lua_tobool( L, -1 ) );
 		}
 		else if( lua_isstring( L, -1 ) )
 		{
-			target.synchronizeEntry< std::string >( cLuaTableEntry< std::string >( key, lua_tostring( L, -1 ) ) );
+			target.insert( key, ( std::string )lua_tostring( L, -1 ) );
 		}
 		else if( lua_isnumber( L, -1 ) )
 		{
-			target.synchronizeEntry< lua_Number >( cLuaTableEntry< lua_Number >( key, lua_tonumber( L, -1 ) ) );
+			target.insert( key, ( double )lua_tonumber( L, -1 ) );
 		}
 		else if( lua_istable( L, -1 ) )
 		{
-			target.synchronizeEntry< cLuaTable >( cLuaTableEntry< cLuaTable >( key, getTable( tableName + key ) );
+			target.insert( key, ( std::map< std::string, boost::any > )convertTable() );
 		}
 		else if( lua_isnil( L, -1 ) )
 		{
-			target.synchronizeEntry< void* >( cLuaTableEntry< void* >( key, NULL ); // Not sure if it's safe
+			target.insert( key, ( void* )NULL );
 		}
 		else
 		{
 			lua_pop( L, 1 );
-			lua_pushstring( L, "Unknown variable type for key: " + key );
-			lua_error( L );
+			error();
+			return NULL;
 		}
 	}
 	lua_pop( L, 1 ); 
 	return target;
 }
 
-template < typename variableType >
-variableType cLuaWrapper::convertVariable( int luaIndex )
+std::vector< boost::any > cLuaWrapper::convertTableToArray( std::map< std::string, boost::any >* table )
+{
+	std::vector< boost::any > array;
+	for( auto const &iterator : table )
+	{
+		array.push_back( iterator.second );
+	}
+	return array;
+}
+
+template <>
+bool cLuaWrapper::convertVariable( int luaIndex )
 {
 	if( lua_isboolean( L, index ) )
 	{
 		return ( bool )lua_tobool( L, index );
 	}
-	else if( lua_isstring( L, index ) )
+	else
 	{
-		return ( std::string )lua_tostring( L, index );
+		lua_pop( L, 1 );
+		error();
+		return NULL;
 	}
-	else if( lua_isnumber( L, index ) )
+}
+
+template <>
+double cLuaWrapper::convertVariable( int luaIndex )
+{
+	if( lua_isnumber( L, index ) )
 	{
-		return ( lua_Number )lua_tonumber( L, index );
-	}
-	else if( lua_istable( L, index ) )
-	{
-		return ( cLuaTable )convertTable();
-	}
-	else if( lua_isnil( L, index ) )
-	{
-		return ( void* ) NULL; // Not sure if safe
+		return ( double )lua_tonumber( L, index );
 	}
 	else
 	{
 		lua_pop( L, 1 );
-		lua_pushstring( L, "Unknown variable type");
-		lua_error( L );
+		error();
+		return NULL;
+	}
+}
+
+template <>
+std::string cLuaWrapper::convertVariable( int luaIndex )
+{
+	if( lua_isstring( L, index ) )
+	{
+		return ( std::string )lua_tostring( L, index );
+	}
+	else
+	{
+		lua_pop( L, 1 );
+		error();
+		return NULL;
+	}
+}
+
+template <>
+std::vector< boost::any > cLuaWrapper::convertVariable( int luaIndex )
+{
+	if( lua_istable( L, index ) )
+	{
+		return convertTableToArray( convertTable() );
+	}
+	else
+	{
+		lua_pop( L, 1 );
+		error();
+		return NULL;
+	}
+}
+
+template <>
+std::map< std::string, boost::any > cLuaWrapper::convertVariable( int luaIndex )
+{
+	if( lua_istable( L, index ) )
+	{
+		return convertTable();
+	}
+	else
+	{
+		lua_pop( L, 1 );
+		error();
+		return NULL;
+	}
+}
+
+template <>
+void* cLuaWrapper::convertVariable( int luaIndex )
+{
+	if( lua_isnil( L, index ) ){
+	{
+		return ( void* )NULL;
+	}
+	else
+	{
+		lua_pop( L, 1 );
+		error();
+		return NULL;
 	}
 }
 
 template < typename variableType >
-variableType cLuaWrapper::getVariable( std::string variableName )
+variableType cLuaWrapper::getGlobal( std::string variableName )
 {
 	lua_getglobal( L, variableName );
 	return convertVariable< variableType >( -1 );
