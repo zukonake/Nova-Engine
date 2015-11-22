@@ -1,9 +1,8 @@
 # Nova-Engine
-Widely customizable roguelike game engine.
-Gameplay defined with use of lua.
+A very customizable rogue-like game engine with gameplay defined by Lua.
 
 # Development
-Extremely WIP. Haven't even built it yet. Stay tuned.
+Extremely early WIP. Haven't even built it yet. Stay tuned.
 If anyone is willing to contribute then go on,
 it would be faster to work in a group.
 Also thanks for any critic opinions,
