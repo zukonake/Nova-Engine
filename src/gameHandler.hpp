@@ -11,7 +11,7 @@ class cGameHandler
 	cGameHandler();
 	friend std::istream& operator>>( istream& os, cGameHandler& gameHandler );
 	friend std::ostream& operator<<( ostream& os, const cGameHandler& gameHandler );
-}
+};
 
 std::istream& operator>>( istream& os, cGameHandler& gameHandler );
 std::ostream& operator<<( ostream& os, const cGameHandler& gameHandler );

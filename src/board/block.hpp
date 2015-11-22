@@ -15,6 +15,6 @@ class cBlock
 	cBlockSubtype* subtype;
 	uint8_t height;
 	cBlock( cTile* _tile, cBlockSubtype* _subtype, uint8_t _height )
-}
+};
 
 #endif

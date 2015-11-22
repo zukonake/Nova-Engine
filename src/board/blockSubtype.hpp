@@ -6,10 +6,10 @@
 
 class cBlockSubtype
 {
-	friend class cBlock
+	friend class cBlock;
 	std::string name;
 	bool isPassable;
 	cBlockSubtype( std::string _name, bool _isPassable )
-}
+};
 
 #endif

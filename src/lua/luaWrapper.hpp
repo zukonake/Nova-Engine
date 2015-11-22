@@ -7,7 +7,7 @@
 #include <map>
 #include <boost/any.hpp>
 
-extern "C" 
+extern "C"
 {
 	#include "lua.h"
 	#include "lualib.h"
@@ -33,7 +33,7 @@ class cLuaWrapper
 	bool openScript( std::string fileName );
 	cLuaWrapper();
 	~cLuaWrapper();
-}
+};
 
 
 #endif

@@ -15,6 +15,6 @@ class cBoard
 	cBoardGenerator* generator;
 	std::string name;
 	cBoard()
-}
+};
 
 #endif
