@@ -9,13 +9,13 @@ class cInterface
 	table componentTable;
 	uint posX;
 	uint posY;
-	uint width;
-	uint height;
 	WINDOW* window;
 	char hBorder;
 	char vBorder;
-	public:
-	void print();
+public:
+	uint width;
+	uint height;
+	void render();
 	void clear();
 	void refresh();
 	cInterface( table luaToCpp, table* objectList );
