@@ -12,9 +12,10 @@ class cTile
 	char base;
 	uint8_t foregroundColor;
 	uint8_t backgroundColor;
+	bool bold;
 public:
 	void render( cInterface* interface, uint posX, uint posY );
-	cTile( char _base, uint8_t _foregroundColor, uint8_t _backgroundColor);
+	cTile( char _base, uint8_t _foregroundColor, uint8_t _backgroundColor, bool _bold );
 };
 
 #endif
