@@ -17,7 +17,6 @@ void cGame::initializeGlobals()
 {
 	luaWrapper->openScript( global::configPath + "config.lua" );
 	global::datasetPath = luaWrapper->getVariable< std::string >( "dataset" );
-	std::vector< std::string >objectsToLoad = luaWrapper->getGlobal< std::vector< std::string > >( "objectsToLoad" );
 }
 
 void cGame::initializeObjects()
@@ -31,6 +30,7 @@ void cGame::initializeObjects()
 	objectTable.insert( std::pair< std::string, table >( "entity", new table ) );
 	objectTable.insert( std::pair< std::string, table >( "entityControl", new table ) );
 	luaWrapper->openScript( extPath + "lua/listFiles.lua" );
+	std::vector< std::string >objectsToLoad = luaWrapper->getGlobal< std::vector< std::string > >( "objectsToLoad" );
 	for( uint16_t i = 0; i < objectsToLoad.size(); i++ )
 	{
 		std::vector< std::string > fileList = luaWrapper->runFunction< std::vector< std::string > >( "listFiles", global::configPath + "dataset/" + datasetPath + objectsToLoad[ i ] );
@@ -77,10 +77,13 @@ void cGame::initializeObjects()
 			}
 		}
 	}
+	player = objectTable[ "entity" ][ "player" ];
+	camera = new cCamera( player->[ "posX" ], player->componentTable[ "posY" ], player->board );
 }
 
 cGame::cGame()
 {
 	luaWrapper = new cLuaWrapper;
+	initializeGlobals();
 	initializeObjects();
 }

@@ -4,6 +4,8 @@
 
 #include "typedef.hpp"
 #include "lua/luaWrapper.hpp"
+#include "camera.hpp"
+#include "interfaceHandler.hpp"
 
 class cGame
 {
@@ -11,7 +13,10 @@ class cGame
 	bool running;
 	cLuaWrapper* luaWrapper;
 	cEntity* player;
+	cCamera* camera;
+	cInterfaceHandler interfaceHandler;
 	table* objectTable;
+public:
 	cGame();
 };
 

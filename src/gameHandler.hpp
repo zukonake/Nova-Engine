@@ -8,6 +8,8 @@
 class cGameHandler
 {
 	cGame* game;
+public:
+	int16_t work();
 	cGameHandler();
 	friend std::istream& operator>>( istream& os, cGameHandler& gameHandler );
 	friend std::ostream& operator<<( ostream& os, const cGameHandler& gameHandler );
