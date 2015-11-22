@@ -6,6 +6,8 @@ Gameplay defined with use of lua.
 Extremely WIP. Haven't even built it yet. Stay tuned.
 If anyone is willing to contribute then go on,
 it would be faster to work in a group.
+Also thanks for any critic opinions,
+as I am still learning how to write cleaner code.
 
 # Copying
 Copyright (C) 2015 zukonake
