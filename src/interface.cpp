@@ -1,11 +1,10 @@
 //interface.cpp
 #include "interface.hpp"
 
-void cInterface::print()
+void cInterface::render()
 {
 	box( nCursesWindow, hBorder, vBorder );
-	//print teh stuff
-	wrefresh( nCursesWindow );
+	//TODO print teh stuff
 }
 
 void cInterface::clear()
@@ -28,7 +27,7 @@ cInterface::cInterface( table luaToCpp, table* objectList ) :
 	hBorder( boost::any_cast< char >( luaToCpp["hBorder"] ) ),
 	vBorder( boost::any_cast< char >( luaToCpp["vBorder"] ) )
 {
-	
+
 }
 
 cInterface::cInterface( table _componentTable, uint _posX, uint _posY, uint _width, uint _height, char _hBorder, char _vBorder ) :
@@ -41,7 +40,7 @@ cInterface::cInterface( table _componentTable, uint _posX, uint _posY, uint _wid
 	hBorder( _hBorder ),
 	vBorder( _vBorder )
 {
-	
+
 }
 
 cInterface::~cInterface()
