@@ -10,6 +10,7 @@ class cGame
 	void initializeObjects();
 	bool running;
 	cLuaWrapper* luaWrapper;
+	cEntity* player;
 	table* objectTable;
 	cGame();
 };

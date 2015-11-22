@@ -14,6 +14,10 @@ class cBoard
 	std::vector < cBlock* > blockList;
 	cBoardGenerator* generator;
 	std::string name;
+	uint height;
+	uint width;
+public:
+	bool canTeleport( uint posX, uint posY );
 	cBoard()
 };
 
