@@ -11,7 +11,7 @@
 class cBoard
 {
 	friend class cEntity;
-	std::vector < cBlock* > blockVector;
+	std::vector < cBlock* > blockList;
 	cBoardGenerator* generator;
 	std::string name;
 	cBoard()
