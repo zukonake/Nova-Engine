@@ -5,9 +5,9 @@ uint16_t cGameHandler::work()
 {
 	while( game->running == true )
 	{
-		game->renderInterfaces();
+		game->interfaceHandler->renderInterfaces();
 		choice();
-		game->clearInterfaces();
+		game->interfaceHandler->clearInterfaces();
 	}
 	return 0;
 }
