@@ -9,10 +9,10 @@ cGameHandler::cGameHandler( cGame _game ) :
 
 std::istream& operator>>( istream& os, cGameHandler& gameHandler )
 {
-	
+
 }
 
 std::ostream& operator<<( ostream& os, const cGameHandler& gameHandler )
 {
-	
+
 }

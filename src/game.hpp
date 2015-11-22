@@ -8,7 +8,7 @@
 class cGame
 {
 	void initializeObjects();
-	void renderVision( cEntity source );
+	bool running;
 	cLuaWrapper* luaWrapper;
 	table* objectTable;
 	cGame();

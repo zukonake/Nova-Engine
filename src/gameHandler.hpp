@@ -9,16 +9,12 @@ class cGameHandler
 {
 	cGame* game;
 	cGameHandler();
+	void renderVision( cEntity source );
 	friend std::istream& operator>>( istream& os, cGameHandler& gameHandler );
 	friend std::ostream& operator<<( ostream& os, const cGameHandler& gameHandler );
 };
 
 std::istream& operator>>( istream& os, cGameHandler& gameHandler );
 std::ostream& operator<<( ostream& os, const cGameHandler& gameHandler );
-
-int main( int argv, char argc[] )
-{
-	return 0;
-}
 
 #endif

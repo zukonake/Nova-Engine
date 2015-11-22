@@ -84,14 +84,3 @@ cGame::cGame()
 	luaWrapper = new cLuaWrapper;
 	initializeObjects();
 }
-
-int main( int argc, char argv[] )
-{
-	cGame game;
-	while( game.running == true )
-	{
-		//game loop
-	}
-	game.end();
-	return 0;
-}
