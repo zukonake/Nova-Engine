@@ -25,7 +25,7 @@ class cLuaWrapper
 	std::vector< boost::any > convertTableToArray( std::map< std::string, boost::any >* table );
 	template < typename variableType >
 	variableType convertVariable( int luaIndex );
-	public:
+public:
 	template < typename variableType >
 	variableType getGlobal( std::string variableName );
 	template < typename variableType >
