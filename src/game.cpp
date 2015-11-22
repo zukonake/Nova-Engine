@@ -1,7 +1,6 @@
 //game.cpp
 #include "game.hpp"
 #include "typedef.hpp"
-#include "lua/luaWrapper.hpp"
 #include "global.hpp"
 #include "game.hpp"
 #include "tile.hpp"
@@ -14,31 +13,32 @@
 #include "entityControl.hpp"
 #include "entity.hpp"
 
+void cGame::initializeGlobals()
+{
+	luaWrapper->openScript( global::configPath + "config.lua" );
+	global::datasetPath = luaWrapper->getVariable< std::string >( "dataset" );
+	std::vector< std::string >objectsToLoad = luaWrapper->getGlobal< std::vector< std::string > >( "objectsToLoad" );
+}
+
 void cGame::initializeObjects()
 {
 	objectTable.insert( std::pair< std::string, table >( "tile", new table ) );
-	objectTable.insert( std::pair< std::string, table >( "blockSubtype", new table ) ); 
+	objectTable.insert( std::pair< std::string, table >( "blockSubtype", new table ) );
 	objectTable.insert( std::pair< std::string, table >( "block", new table ) );
 	objectTable.insert( std::pair< std::string, table >( "interface", new table ) );
 	objectTable.insert( std::pair< std::string, table >( "boardGenerator", new table ) );
 	objectTable.insert( std::pair< std::string, table >( "board", new table ) );
 	objectTable.insert( std::pair< std::string, table >( "entity", new table ) );
-	objectTable.insert( std::pair< std::string, table >( "entityControl", new table ) ); 
-	//working dir is probably bin/debug or bin/release depending on situation so ../../ fits
-	luaWrapper = cLuaWrapper();
-	luaWrapper.openScript( global::configPath + "config.lua" );
-	global::datasetPath = luaWrapper.getVariable< std::string >( "dataset" );
-	std::vector< std::string >objectsToLoad = luaWrapper.getGlobal< std::vector< std::string > >( "objectsToLoad" );
-	//TODO load global variables
-	luaWrapper.openScript( extPath + "lua/listFiles.lua" );
+	objectTable.insert( std::pair< std::string, table >( "entityControl", new table ) );
+	luaWrapper->openScript( extPath + "lua/listFiles.lua" );
 	for( uint16_t i = 0; i < objectsToLoad.size(); i++ )
 	{
-		std::vector< std::string > fileList = luaWrapper.runFunction< std::vector< std::string > >( "listFiles", global::configPath + "dataset/" + datasetPath + objectsToLoad[ i ] );
+		std::vector< std::string > fileList = luaWrapper->runFunction< std::vector< std::string > >( "listFiles", global::configPath + "dataset/" + datasetPath + objectsToLoad[ i ] );
 		for( uint16_t iA = 0; iA < fileList.size(); iA++ )
 		{
-			luaWrapper.openScript( global::configPath + "dataset/" + datasetPath + objectsToLoad[ i ] + fileList[ iA ] );
-			std::string tableName = luaWrapper.getGlobal< std::string >( fileList[ iA ].substr( 0, fileList[ iA ].size() - 4 ) ); //filename without .lua
-			table luaToCpp = luaWrapper.getGlobal< table >( tableName );
+			luaWrapper->openScript( global::configPath + "dataset/" + datasetPath + objectsToLoad[ i ] + fileList[ iA ] );
+			std::string tableName = luaWrapper->getGlobal< std::string >( fileList[ iA ].substr( 0, fileList[ iA ].size() - 4 ) ); //filename without .lua
+			table luaToCpp = luaWrapper->getGlobal< table >( tableName );
 			if( objectsToLoad[ i ] == "tile" )
 			{
 				objectTable[ "tile" ][ tableName ] = new cTile( luaToCpp, &objectTable );
@@ -81,5 +81,17 @@ void cGame::initializeObjects()
 
 cGame::cGame()
 {
+	luaWrapper = new cLuaWrapper;
 	initializeObjects();
+}
+
+int main( int argc, char argv[] )
+{
+	cGame game;
+	while( game.running == true )
+	{
+		//game loop
+	}
+	game.end();
+	return 0;
 }
