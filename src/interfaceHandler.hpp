@@ -10,6 +10,8 @@ class cInterfaceHandler
 {
 	uint width;
 	uint height;
+	SDL_Window* screen;
+	SDL_Renderer* renderer;
 public:
 	std::vector< cInterface > interfaceVector;
 	render();

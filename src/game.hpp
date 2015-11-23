@@ -16,6 +16,7 @@ class cGame
 	cCamera* camera;
 	cInterfaceHandler interfaceHandler;
 	table* objectTable;
+	std::string gameTitle;
 public:
 	cGame();
 };

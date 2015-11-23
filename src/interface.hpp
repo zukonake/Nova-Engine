@@ -1,7 +1,6 @@
 //interface.hpp
 #ifndef INTERFACE_HPP
 #define INTERFACE_HPP
-#include <ncurses.h>
 #include "typedef.hpp"
 
 class cInterface
@@ -9,9 +8,7 @@ class cInterface
 	table componentTable;
 	uint posX;
 	uint posY;
-	WINDOW* window;
-	char hBorder;
-	char vBorder;
+	SDL_Texture* texture;
 public:
 	uint width;
 	uint height;
