@@ -10,9 +10,10 @@ local butcher =
 	component =
 	{
 		name = "Butcher",
-		hp = 100,
-		ap = 50,
-		mp = 10,
+		healthPoints = 100,
+		attackDamage = 50,
+		moveSpeed = 10,
+		fov = 15.0,
 		alive = true,
 		solid = false
 	}
