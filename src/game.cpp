@@ -29,7 +29,7 @@ void cGame::initializeObjects()
 	objectTable.insert( std::pair< std::string, table >( "board", new table ) );
 	objectTable.insert( std::pair< std::string, table >( "entity", new table ) );
 	objectTable.insert( std::pair< std::string, table >( "entityControl", new table ) );
-	luaWrapper->openScript( extPath + "lua/listFiles.lua" );
+	luaWrapper->openScript( "lua/listFiles.lua" );
 	std::vector< std::string >objectsToLoad = luaWrapper->getGlobal< std::vector< std::string > >( "objectsToLoad" );
 	for( uint16_t i = 0; i < objectsToLoad.size(); i++ )
 	{
