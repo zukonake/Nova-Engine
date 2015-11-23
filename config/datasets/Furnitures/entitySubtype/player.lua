@@ -1,6 +1,6 @@
 locacl player =
 {
-  tille =
+  tile =
   {
     base = "$",
     foregroundColor = 02,
