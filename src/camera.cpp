@@ -1,8 +1,8 @@
 #include "camera.hpp"
 
-bool cCamera::move( uint _posX, uint _posY, cBoard* _board )
+bool cCamera::teleport( uint _posX, uint _posY, cBoard* _board )
 {
-	if( _board->canMove( _posX, _posY ) )
+	if( _board->canTeleport( _posX, _posY ) )
 	{
 		posX = _posX;
 		posY = _posY;

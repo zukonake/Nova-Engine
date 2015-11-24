@@ -7,7 +7,7 @@ OBJS =
 CC = g++
 DEBUG = -g
 STD = -std=c++14
-LIBS = -liblua -libdl
+LIBS = -liblua -libdl -lSDL2
 CFLAGS = $(STD) -Wall -c $(DEBUG) $(LIBS)
 LFLAGS = $(STD) -Wall $(DEBUG) $(LIBS)
 

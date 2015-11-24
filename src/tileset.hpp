@@ -10,7 +10,7 @@ class cTileset
 	SDL_Texture* texture;
 public:
 	void renderRect( SDL_Rect* rectangle, SDL_Renderer* renderer );
-	cTile( SDL_Texture* _texture );
+	cTileset( SDL_Texture* _texture );
 };
 
 #endif

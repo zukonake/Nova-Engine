@@ -3,8 +3,7 @@
 
 void cInterface::render()
 {
-	box( nCursesWindow, hBorder, vBorder );
-	//TODO print teh stuff
+	
 }
 
 void cInterface::clear()
