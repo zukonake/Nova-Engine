@@ -12,18 +12,12 @@ void cInterfaceHandler::render()
 
 void cInterfaceHandler::clear()
 {
-	for(int i = 0; i < interfaceVector.size(); i++ )
-	{
-		interfaceVector[i]->clear();
-	}
+	SDL_RenderClear( renderer );
 }
 
 void cInterfaceHandler::refresh()
 {
-	for(int i = 0; i < interfaceVector.size(); i++ )
-	{
-		interfaceVector[i]->refresh();
-	}
+	SDL_RenderPresent( renderer );
 }
 
 cInterfaceHandler::cInterfaceHandler(std::string windowTitle, uint _width, uint _height )

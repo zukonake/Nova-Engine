@@ -8,13 +8,12 @@
 
 class cInterface
 {
-	std::vector< interfaceComponent > componentTable;
+	friend class cInterfaceHandler;
+	std::vector< interfaceComponent > componentVector;
 	SDL_Rect* rectangle.
 	SDL_Texture* texture;
 public:
 	void render();
-	void clear();
-	void refresh();
 	cInterface( table luaToCpp, table* objectList );
 	cInterface( table _componentTable, uint _posX, uint _posY, uint _width, uint _height );
 	~cInterface();

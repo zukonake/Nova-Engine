@@ -9,6 +9,7 @@ class cInterfaceComponent
 {
 	std::string script;
 	SDL_Texture* texture;
+public:
 	void render();
 	cInterfaceComponent::cInterfaceComponent( table luaToCpp, table* objectList );
 };

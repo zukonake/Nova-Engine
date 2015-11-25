@@ -1,19 +1,13 @@
 //interface.cpp
 #include "interface.hpp"
 
-void cInterface::render()
+void cInterface::render( SDL_Renderer* renderer )
 {
-	
-}
-
-void cInterface::clear()
-{
-	wclear( nCursesWindow );
-}
-
-void cInterface::refresh()
-{
-	wrefresh( nCursesWindow );
+	SDL_RenderCopy( renderer, texture, NULL, NULL );
+	for( int i = 0; i < componentVector; i++ )
+	{
+		componentVector[i]->render();
+	}
 }
 
 cInterface::cInterface( table luaToCpp, table* objectList ) :
