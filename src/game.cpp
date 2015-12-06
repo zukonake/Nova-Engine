@@ -81,9 +81,24 @@ void cGame::initializeObjects()
 	camera = new cCamera( player->[ "posX" ], player->componentTable[ "posY" ], player->board );
 }
 
+int cGame::work()
+{
+	while( running == true )
+	{
+		interfaceHandler->render();
+		interfaceHandler->choice();
+		interfaceHandler->clear();
+	}
+	return 0;
+}
+
 cGame::cGame()
 {
 	luaWrapper = new cLuaWrapper;
 	initializeGlobals();
 	initializeObjects();
+	work();
 }
+
+std::istream& operator>>( istream& os, cGame& game ); //load
+std::ostream& operator<<( ostream& os, const cGame& game ); //save

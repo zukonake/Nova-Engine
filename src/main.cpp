@@ -2,6 +2,6 @@
 
 int main( int argc, char argv[] )
 {
-	cGameHandler gameHandler;
-	return gameHandler.work();
+	cGame game;
+	return 0;
 }

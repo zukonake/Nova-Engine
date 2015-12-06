@@ -2,6 +2,7 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
+#include <iostream>
 #include "typedef.hpp"
 #include "lua/luaWrapper.hpp"
 #include "camera.hpp"
@@ -9,6 +10,8 @@
 
 class cGame
 {
+	friend std::istream& operator>>( istream& os, cGame& game ); //load
+	friend std::ostream& operator<<( ostream& os, const cGame& game ); //save
 	void initializeObjects();
 	bool running;
 	cLuaWrapper* luaWrapper;
@@ -17,6 +20,7 @@ class cGame
 	cInterfaceHandler interfaceHandler;
 	table* objectTable;
 	std::string gameTitle;
+	int work();
 public:
 	cGame();
 };
