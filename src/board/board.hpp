@@ -4,21 +4,26 @@
 
 #include <string>
 #include <vector>
-
-#include "block.hpp"
-#include "boardGenerator.hpp"
+//
+#include <typedef.hpp>
+#include <position.hpp>
+#include <block/block.hpp>
+#include <board/boardGenerator.hpp>
 
 class cBoard
 {
 	friend class cEntity;
-	std::vector < cBlock* > blockList;
+	friend class cGame::initializeObjects();
+	std::vector < cBlock* > blockVector;
 	cBoardGenerator* generator;
 	std::string name;
 	uint height;
 	uint width;
 public:
-	bool canTeleport( uint posX, uint posY );
-	cBoard()
+	bool canTeleport( cPosition targetPos );
+private:
+	cBoard( std::vector< cBlock* > _blockVector, cBoardGenerator* _generator, std::string _name, uint _height, uint _width);
+	cBoard( table luaToCpp, table* objectTable );
 };
 
 #endif
