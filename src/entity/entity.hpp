@@ -3,10 +3,11 @@
 #define ENTITY_HPP
 
 #include <string>
-#include "../typedef.hpp"
-#include "../board.hpp"
-#include "entitySubtype.hpp"
-#include "entityControl.hpp"
+//
+#include <typedef.hpp>
+#include <board/board.hpp>
+#include <entity/entitySubtype.hpp>
+#include <entity/entityControl.hpp>
 
 class cEntity
 {

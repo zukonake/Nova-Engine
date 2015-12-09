@@ -1,4 +1,4 @@
-#include "gameHandler.hpp"
+#include <gameHandler.hpp>
 
 int main( int argc, char argv[] )
 {

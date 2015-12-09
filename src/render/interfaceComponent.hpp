@@ -3,7 +3,8 @@
 #define INTERFACECOMPONENT_HPP
 #include <string>
 #include <SDL2/SDL.h>
-#include "typedef.hpp"
+//
+#include <typedef.hpp>
 
 class cInterfaceComponent
 {

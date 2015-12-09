@@ -1,9 +1,9 @@
 //tileset.hpp
 #ifndef TILESET_HPP
 #define TILESET_HPP
-#include <cstdin>
 #include <SDL2/SDL.h>
-#include "typedef.hpp"
+//
+#include <typedef.hpp>
 
 class cTileset
 {

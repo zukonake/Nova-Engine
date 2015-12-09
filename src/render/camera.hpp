@@ -2,9 +2,9 @@
 #ifndef CAMERA_HPP
 #define CAMERA_HPP
 
-#include "typedef.hpp"
-#include "interface.hpp"
-#include "board.hpp"
+#include <typedef.hpp>
+#include <render/interface.hpp>
+#include <board/board.hpp>
 
 class cCamera
 {

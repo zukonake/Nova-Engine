@@ -1,18 +1,19 @@
 //game.cpp
-#include "game.hpp"
-#include "typedef.hpp"
-#include "global.hpp"
-#include "game.hpp"
-#include "tile.hpp"
-#include "blockSubtype.hpp"
-#include "block.hpp"
+/*
+#include "game.hpp>
+#include "typedef.hpp>
+#include "global.hpp>
+#include "game.hpp>
+#include "tile.hpp>
+#include "blockSubtype.hpp>
+#include "block.hpp>
 #include "interface.hpp"
 #include "boardGenerator.hpp"
 #include "board.hpp"
 #include "entitySubtype.hpp"
 #include "entityControl.hpp"
 #include "entity.hpp"
-
+*/ //TODO rewrite
 void cGame::initializeGlobals()
 {
 	luaWrapper->openScript( global::configPath + "config.lua" );

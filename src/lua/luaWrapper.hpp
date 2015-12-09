@@ -6,15 +6,13 @@
 #include <vector>
 #include <map>
 #include <boost/any.hpp>
-
 extern "C"
 {
 	#include "lua.h"
 	#include "lualib.h"
 	#include "lauxlib.h"
 }
-
-#include "luaTable.hpp"
+//
 
 class cLuaWrapper
 {

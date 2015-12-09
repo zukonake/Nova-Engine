@@ -1,6 +1,7 @@
 //board.cpp
-#include "board.hpp"
 #include <boost/any.hpp>
+//
+#include "board.hpp"
 
 bool cBoard::canTeleport( cPosition targetPos )
 {

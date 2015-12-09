@@ -1,6 +1,7 @@
 //block.cpp
-#include "block.hpp"
 #include <boost/any.hpp>
+//
+#include "block.hpp"
 
 void cBlock::render( cInterface* interface, uint posX, uint posY )
 {

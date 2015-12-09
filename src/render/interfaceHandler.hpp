@@ -3,8 +3,9 @@
 #define INTERFACEHANDLER_HPP
 #include <vector>
 #include <SDL2/SDL.h>
-#include "typedef.hpp"
-#include "interface.hpp"
+//
+#include <typedef.hpp>
+#include <render/interface.hpp>
 
 class cInterfaceHandler
 {

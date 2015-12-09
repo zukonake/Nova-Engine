@@ -3,10 +3,11 @@
 #define GAME_HPP
 
 #include <iostream>
-#include "typedef.hpp"
-#include "lua/luaWrapper.hpp"
-#include "camera.hpp"
-#include "interfaceHandler.hpp"
+//
+#include <typedef.hpp>
+#include <lua/luaWrapper.hpp>
+#include <render/camera.hpp>
+#include <render/interfaceHandler.hpp>
 
 class cGame
 {

@@ -1,11 +1,7 @@
 //global.hpp
 #ifndef GLOBAL_HPP
 #define GLOBAL_HPP
-#include <map>
-#include <boost/any.hpp>
 #include <string>
-#include <cstdint>
-#include "lua/luaTable.hpp"
 
 namespace global
 {

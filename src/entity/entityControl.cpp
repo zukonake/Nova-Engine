@@ -1,5 +1,5 @@
 //entityControl.cpp
-#include "entiyControl.hpp"
+#include "entityControl.hpp"
 
 cEntityControl::cEntityControl()
 {

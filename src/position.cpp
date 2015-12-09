@@ -1,5 +1,5 @@
 //position.cpp
-#include <position.hpp>
+#include "position.hpp"
 
 cPosition::cPosition( uint _x, uint _y ) :
 	x( _x ),

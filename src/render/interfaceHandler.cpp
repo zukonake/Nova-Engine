@@ -1,5 +1,6 @@
 //interfaceHandler.cpp
 #include <ncurses.h>
+//
 #include "interfaceHandler.hpp"
 
 void cInterfaceHandler::render()

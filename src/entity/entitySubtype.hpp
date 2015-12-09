@@ -2,12 +2,11 @@
 #ifndef ENTITYSUBTYPE_HPP
 #define ENTITYSUBTYPE_HPP
 
-#include "typedef.hpp"
-#include "tile.hpp"
+#include <typedef.hpp>
 
 class cEntitySubtype
 {
-	cTile* tile;
+	//TODO tileset
 	table componentTable;
 	cEntitySubtype( cTile* _tile );
 };

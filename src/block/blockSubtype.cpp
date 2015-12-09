@@ -1,6 +1,7 @@
 //blockSubtype.cpp
-#include "blockSubtype.hpp"
 #include <boost/any.hpp>
+//
+#include "blockSubtype.hpp"
 
 cBlockSubtype::cBlockSubtype( std::string _name, bool _isPassable, cTileset* _tileset, cPosition _tilesetPos ) :
 	name( _name ),
