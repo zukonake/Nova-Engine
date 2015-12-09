@@ -4,20 +4,21 @@
 
 #include <cstdint>
 #include <string>
-
-#include "typedef.hpp"
-#include "interface.hpp"
-#include "tile.hpp"
-#include "blockSubtype.hpp"
+//
+#include <typedef.hpp>
+#include <position.hpp>
+#include <render/interface.hpp>
+#include <block/blockSubtype.hpp>
 
 class cBlock
 {
 	friend class cBoard;
-	cTile* tile;
+	friend class cGame::initializeObjects();
+	friend class cCamera::render();
 	cBlockSubtype* subtype;
-	uint8_t height;
-	void render( cInterface* interface, uint posX, uint posX );
-	cBlock( cTile* _tile, cBlockSubtype* _subtype, uint8_t _height );
+	void render( cInterface* interface, cPosition pos );
+	cBlock( cBlockSubtype* _subtype );
+	cBlock( table luaToCpp, table* objectTable );
 };
 
 #endif

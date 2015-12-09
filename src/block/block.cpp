@@ -1,15 +1,20 @@
 //block.cpp
 #include "block.hpp"
+#include <boost/any.hpp>
 
 void cBlock::render( cInterface* interface, uint posX, uint posY )
 {
-	tile->render( interface, posX, posY );
+	//TODO
 }
 
-cBlock( cTile* _tile, cBlockSubtype* _subtype, uint8_t _height ) :
-	tile( _tile ),
+cBlock( cBlockSubtype* _subtype ) :
 	subtype( _subtype ),
-	height( _height )
+{
+
+}
+
+cBlock( table luaToCpp, table* objectTable ) :
+	subtype( boost::any_cast< blockSubtype* >( luaToCpp[ "subtype" ] ));
 {
 
 }
