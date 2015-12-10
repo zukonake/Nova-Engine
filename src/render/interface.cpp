@@ -4,7 +4,7 @@
 void cInterface::render( SDL_Renderer* renderer )
 {
 	SDL_RenderCopy( renderer, texture, NULL, NULL );
-	for( int i = 0; i < componentVector; i++ )
+	for( auto iterator : componentVector )
 	{
 		componentVector[i]->render();
 	}

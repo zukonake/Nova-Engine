@@ -5,7 +5,7 @@
 
 void cInterfaceHandler::render()
 {
-	for(int i = 0; i < interfaceVector.size(); i++ )
+	for(auto iterator : interfaceVector )
 	{
 		interfaceVector[i]->render();
 	}
