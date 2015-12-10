@@ -1,17 +1,17 @@
 //luaWrapper.cpp
 #include "luaWrapper.hpp"
 
-void cLuaWrapper::error( std::string message = std::string("") )
+void cLuaWrapper::error( std::string message = std::string("UNKNOWN") )
 {
 	lua_pushstring( L, message );
 	lua_error( L );
 }
 
-std::map< std::string, boost::any > cLuaWrapper::convertTable()
+table cLuaWrapper::convertTable()
 {
 	lua_pushnil( L );
 	std::map< std::string, boost::any > target;
-	while ( lua_next( L, -2 ) != 0 ) 
+	while ( lua_next( L, -2 ) != 0 )
 	{
 		std::string key = lua_tostring( L, -2 );
 		if( lua_isboolean( L, -1 ) )
@@ -41,14 +41,14 @@ std::map< std::string, boost::any > cLuaWrapper::convertTable()
 			return NULL;
 		}
 	}
-	lua_pop( L, 1 ); 
+	lua_pop( L, 1 );
 	return target;
 }
 
-std::vector< boost::any > cLuaWrapper::convertTableToArray( std::map< std::string, boost::any >* table )
+std::vector< boost::any > cLuaWrapper::convertTableToArray( table* target )
 {
 	std::vector< boost::any > array;
-	for( auto const &iterator : table )
+	for( auto iterator : table )
 	{
 		array.push_back( iterator.second );
 	}
@@ -195,4 +195,3 @@ cLuaWrapper::~cLuaWrapper()
 {
 	lua_close( L );
 }
-

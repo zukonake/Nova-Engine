@@ -4,7 +4,6 @@
 
 #include <string>
 #include <vector>
-#include <map>
 #include <boost/any.hpp>
 extern "C"
 {
@@ -13,14 +12,15 @@ extern "C"
 	#include "lauxlib.h"
 }
 //
+#include <typedef.hpp>
 
 class cLuaWrapper
 {
 	friend class cInitializer;
 	lua_state *L;
 	void error( std::string message );
-	std::map< std::string, boost::any > convertTable();
-	std::vector< boost::any > convertTableToArray( std::map< std::string, boost::any >* table );
+	table convertTable();
+	std::vector< boost::any > convertTableToArray( table* target );
 	template < typename variableType >
 	variableType convertVariable( int luaIndex );
 public:
