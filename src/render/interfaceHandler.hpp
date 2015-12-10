@@ -9,6 +9,7 @@
 
 class cInterfaceHandler
 {
+	typedef std::vector< std::unique_ptr< cInterface > >interfaceVector;
 	uint width;
 	uint height;
 	SDL_Window* screen;

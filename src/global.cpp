@@ -3,6 +3,18 @@
 
 using namespace global
 {
-	configPath = "../../config/";
 	workingDirectory = "../../";
+	configPath = workingDirectory + "config/";
+	objectTypes = {
+		"tileset",
+		"blockSubtype",
+		"block",
+		"boardGenerator",
+		"board",
+		"entitySubtype",
+		"entity",
+		"entityAction",
+		"entityControl",
+		"interfaceComponent",
+		"interface" }
 }
