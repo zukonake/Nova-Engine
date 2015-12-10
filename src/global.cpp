@@ -4,4 +4,5 @@
 using namespace global
 {
 	configPath = "../../config/";
+	workingDirectory = "../../";
 }

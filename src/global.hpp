@@ -6,7 +6,7 @@
 namespace global
 {
 	extern const std::string configPath;
-	extern std::string datasetPath;
+	extern const std::string workingDirectory;
 }
 
 #endif
