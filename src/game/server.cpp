@@ -1,9 +1,21 @@
 //server.cpp
 
 #include "server.hpp"
+#include <render/tileset.hpp>
+#include <block/blockSubtype.hpp>
+#include <block/block.hpp>
+#include <board/boardGenerator.hpp>
+#include <board/board.hpp>
+#include <entity/entitySubtype.hpp>
+#include <entity/entity.hpp>
+#include <entity/entityAction.hpp>
+#include <entity/entityControl.hpp>
+#include <render/interfaceComponent.hpp>
+#include <render/interface.hpp>
 
 void cServer::initializeVariables()
 {
+	luaWrapper = std::make_unique< cLuaWrapper >( new cLuaWrapper );
 	luaWrapper->openScript( global::configPath + "config.lua" );
 	datasetPath = luaWrapper->getVariable< std::string >( "dataset" );
 }
@@ -79,7 +91,7 @@ void cGame::initializeObjects()
 	}
 }
 
-int cGame::work()
+void cGame::work()
 {
 	while( running )
 	{
@@ -90,20 +102,20 @@ int cGame::work()
 	return 0;
 }
 
-cGame::cGame()
+void cGame::initialize()
 {
-	luaWrapper = std::make_unique< cLuaWrapper >( new cLuaWrapper );
 	initializeVariables();
 	initializeObjects();
-	work();
 }
 
-std::istream& operator>>( istream& os, cGame& game )
+void cGame::connectClient( std::unique_ptr< cClient > target )
 {
-	//load
+	target->connectServer( std::move( objectTable ) );
+	clients.push_back( target );
 }
 
-std::ostream& operator<<( ostream& os, const cGame& game )
+static cGame& cGame::newInstance()
 {
-	//save
+	static cGame instance;
+	return instance;
 }
