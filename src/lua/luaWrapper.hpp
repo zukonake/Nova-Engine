@@ -17,7 +17,9 @@ extern "C"
 class cLuaWrapper
 {
 	friend class cInitializer;
+
 	lua_state *L;
+
 	void error( std::string message );
 	table convertTable();
 	std::vector< boost::any > convertTableToArray( table* target );
@@ -29,6 +31,7 @@ public:
 	template < typename variableType >
 	variableType runFunction( std::string functionName, std::string argument );
 	bool openScript( std::string fileName );
+
 	cLuaWrapper();
 	~cLuaWrapper();
 };
