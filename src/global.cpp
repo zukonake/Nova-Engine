@@ -16,5 +16,9 @@ using namespace global
 		"entityAction",
 		"entityControl",
 		"interfaceComponent",
-		"interface" }
+		"interface" };
+
+	screenWidth = 800;
+	screenHeight = 800;
+	windowTitle = "Nova-Engine";
 }
