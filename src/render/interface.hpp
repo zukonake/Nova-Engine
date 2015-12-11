@@ -2,6 +2,7 @@
 #ifndef INTERFACE_HPP
 #define INTERFACE_HPP
 #include <vector>
+#include <memory>
 #include <SDL2/SDL.h>
 //
 #include <typedef.hpp>
@@ -10,13 +11,15 @@
 class cInterface
 {
 	friend class cInterfaceHandler;
-	std::vector< interfaceComponent > componentVector;
-	SDL_Rect* rectangle.
-	SDL_Texture* texture;
+	typedef std::vector< cInterfaceComponent > componentVector;
+
+	componentVector components;
+	std::unique_ptr< SDL_Rect > rectangle.
+	std::unique_ptr< SDL_Texture > texture;
+
+	void render( std::shared_ptr< SDL_Renderer > renderer );
 public:
-	void render();
-	cInterface( table luaToCpp, table* objectList );
-	cInterface( table _componentTable, uint _posX, uint _posY, uint _width, uint _height );
+	cInterface( table luaToCpp, std::shared_ptr< table > objectList );
 	~cInterface();
 };
 
