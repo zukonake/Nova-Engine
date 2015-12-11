@@ -16,7 +16,7 @@ class cServer
 
 	bool running;
 	std::unique_ptr< cLuaWrapper > luaWrapper;
-	std::unique_ptr< table > objectTable;
+	std::shared_ptr< table > objectTable;
 	std::string gameTitle;
 	std::string datasetName;
 	clientArray clients;

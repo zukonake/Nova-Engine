@@ -108,9 +108,9 @@ void cGame::initialize()
 	initializeObjects();
 }
 
-void cGame::connectClient( std::unique_ptr< cClient > target )
+void cGame::connectClient( std::shared_ptr< cClient > target )
 {
-	target->connectServer( std::move( objectTable ) );
+	target->connectServer( objectTable );
 	clients.push_back( target );
 }
 
