@@ -2,19 +2,26 @@
 #ifndef CAMERA_HPP
 #define CAMERA_HPP
 
+#include <memory>
+//
 #include <typedef.hpp>
-#include <render/interface.hpp>
+#include <position.hpp>
 #include <board/board.hpp>
+#include <render/interface.hpp>
 
 class cCamera
 {
-	uint posX;
-	uint posY;
-	cBoard* board;
+	cPosition boardPos;
+	std::shared_ptr< cBoard > board;
 public:
-	bool move( uint _posX, uint _posY, cBoard* _board );
-	void render( cInterface* interface, uint fov, uint posX, uint posY );
-	cCamera( uint _posX, uint _posY, cBoard* _board );
+	void render( std::shared_ptr< cInterface > interface, cPosition screenPos, uint fov );
+
+	cCamera( std::unique_ptr< cBoard > _board, cPosition _boardPos );
 };
+
+/*
+cCamera exceptions:
+	> 01 - Invalid board pointer
+*/
 
 #endif

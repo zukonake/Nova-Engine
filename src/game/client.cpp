@@ -9,14 +9,22 @@ void cClient::work()
 	}
 }
 
-cClient::cClient( std::unique_ptr< table > _objectTable ) :
-	objectTable( move( objectTable ) )
+void cClient::connectServer( std::shared_ptr< table > _objectTable )
 {
-	player = std::make_unique( objectTable[ "entity" ][ "player" ] );
-	camera = std::make_unique( new cCamera( player->pos, player->board ) );
+	objectTable = _objectTable,
+	player = boost::any_cast< std::shared_ptr< cEntity >( objectTable[ "entity" ][ "player" ] ),
+	interfaceHandler.camera = std::make_unique( new cCamera( player->pos, player->board ) );
 }
-
-cClient::cClient()
+/*
+cClient::cClient( std::unique_ptr< table > _objectTable, uint screenWidth = 800, uint screenHeight = 640, std::string windowTitle = "Unnamed" ) :
+	objectTable( objectTable )
 {
-	
+	interfaceHandler = interfaceHandler( screenWidth, screenHeight, windowTitle );
+	player = std::make_shared( objectTable[ "entity" ][ "player" ] );
+	interfaceHandler.camera = std::make_unique( new cCamera( player->pos, player->board ) );
+}*/
+
+cClient::cClient( uint screenWidth = 800, uint screenHeight = 640, std::string windowTitle = "Unnamed" )
+{
+	interfaceHandler = interfaceHandler( screenWidth, screenHeight, windowTitle );
 }

@@ -11,18 +11,18 @@
 class cClient
 {
 	friend class cServer;
-	
-	std::unique_ptr< table > objectTable;
-	std::unique_ptr< cEntity > player;
-	std::unique_ptr< cCamera > camera;
+
+	std::shared_ptr< table > objectTable;
+	std::shared_ptr< cEntity > player;
 	cInterfaceHandler interfaceHandler;
 
 	void work();
 	void render();
+	void connectServer( std::shared_ptr< table > _objectTable );
 public:
 
-	cClient( std::unique_ptr< table > _objectTable );
-	cClient();
+	//cClient( std::unique_ptr< table > _objectTable, uint screenWidth = 800, uint screenHeight = 640 );
+	cClient( uint screenWidth = 800, uint screenHeight = 640 );
 };
 
 #endif
