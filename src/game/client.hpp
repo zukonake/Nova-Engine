@@ -11,6 +11,7 @@
 class cClient
 {
 	friend class cServer;
+	
 	std::unique_ptr< table > objectTable;
 	std::unique_ptr< cEntity > player;
 	std::unique_ptr< cCamera > camera;
@@ -19,7 +20,9 @@ class cClient
 	void work();
 	void render();
 public:
+
 	cClient( std::unique_ptr< table > _objectTable );
+	cClient();
 };
 
 #endif
