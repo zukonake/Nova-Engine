@@ -7,7 +7,7 @@
 #include <SDL2/SDL.h>
 //
 #include <typedef.hpp>
-#include <camera.hpp>
+#include <render/camera.hpp>
 #include <render/interface.hpp>
 
 class cInterfaceHandler
