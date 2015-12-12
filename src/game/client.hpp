@@ -7,6 +7,7 @@
 #include <typedef.hpp>
 #include <entity/entity.hpp>
 #include <render/camera.hpp>
+#include <render/interfaceHandler.hpp>
 
 class cClient
 {
