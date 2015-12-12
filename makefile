@@ -25,7 +25,7 @@ $(OBJ_PATH)luaWrapper.cpp
 $(OBJ_PATH)typedef.cpp
 $(OBJ_PATH)global.cpp
 endef
-OBJS = $(OBJS:.cpp=.o)
+OBJS = $(SOURCES:.cpp=.o)
 CC = g++
 DEBUG = -g
 STD = -std=c++14
