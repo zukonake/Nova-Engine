@@ -8,6 +8,7 @@ LIBRARY_PATH = lib/
 DEPEND_PATH = build/depend
 SOURCES = $(shell find $(SOURCE_PATH) -type f -name "*.cpp" -printf '%p ')
 #STO = $(OBJ_PATH)$(shell basename -a $(SOURCES))
+#TODO prepend objs with OBJ_PATH and also update make depend rules
 OBJS = $(SOURCES:.cpp=.o)
 CXX = g++
 DEBUG = -g
@@ -26,7 +27,7 @@ $(TARGET_PATH) : $(OBJS)
 	$(CXX) $(LDFLAGS) $(OBJS) -o $@
 
 %.o : %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@ >> make.log
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 depend : $(SOURCES)
 	$(CXX) $(CXXFLAGS) -MM $(SOURCES) > $(DEPEND_PATH)
