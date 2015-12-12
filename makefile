@@ -1,5 +1,5 @@
 SOURCE_PATH = src/
-OBJ_PATH = build/obj
+OBJ_PATH = build/obj/
 DEBUG_PATH = bin/debug/Nova-Game_D
 RELEASE_PATH = bin/release/Nova-Game
 TARGET_PATH = $(DEBUG_PATH)
