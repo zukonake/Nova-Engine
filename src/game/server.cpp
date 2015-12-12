@@ -28,9 +28,9 @@ void cGame::initializeObjects()
 	objectTable[ "boardGenerator" ] = table();
 	objectTable[ "board" ] = table();
 	objectTable[ "entitySubtype" ] = table();
-	objectTable[ "entity" ] = table();
 	objectTable[ "entityAction" ] = table();
 	objectTable[ "entityControl" ] = table();
+	objectTable[ "entity" ] = table();
 	objectTable[ "interfaceComponent" ] = table();
 	objectTable[ "interface" ] = table();
 	luaWrapper->openScript( workingDirectory + "src/lua/scripts/listFiles.lua" );
@@ -67,10 +67,6 @@ void cGame::initializeObjects()
 			{
 				objectTable[ "entitySubtype" ][ tableName ] = std::make_shared< cEntitySubtype >( new cEntitySubtype( luaToCpp, &objectTable ) );
 			}
-			else if( global::objectsToLoad[ i ] == "entity" )
-			{
-				objectTable[ "entity" ][ tableName ] = std::make_shared< cEntity >( new cEntity( luaToCpp, &objectTable ) );
-			}
 			else if( global::objectsToLoad[ i ] == "entityAction" )
 			{
 				objectTable[ "entityAction" ][ tableName ] = std::make_shared< cEntityAction >( new cEntityAction( luaToCpp, &objectTable ) );
@@ -78,6 +74,10 @@ void cGame::initializeObjects()
 			else if( global::objectsToLoad[ i ] == "entityControl" )
 			{
 				objectTable[ "entityControl" ][ tableName ] = std::make_shared< cEntityControl >( new cEntityControl( luaToCpp, &objectTable ) );
+			}
+			else if( global::objectsToLoad[ i ] == "entity" )
+			{
+				objectTable[ "entity" ][ tableName ] = std::make_shared< cEntity >( new cEntity( luaToCpp, &objectTable ) );
 			}
 			else if( global::objectsToLoad[ i ] == "interfaceComponent" )
 			{
