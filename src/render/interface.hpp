@@ -14,11 +14,12 @@ class cInterface
 	typedef std::vector< cInterfaceComponent > componentVector;
 
 	componentVector components;
-	std::unique_ptr< SDL_Rect > rectangle.
-	std::unique_ptr< SDL_Texture > texture;
+	SDL_Rect renderArea;
+	std::shared_ptr< SDL_Texture > texture;
+	bool hidden;
 
 	void render( std::shared_ptr< SDL_Renderer > renderer );
-public:
+
 	cInterface( table luaToCpp, std::shared_ptr< table > objectTable );
 	~cInterface();
 };

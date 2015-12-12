@@ -3,19 +3,21 @@
 
 void cInterface::render( SDL_Renderer* renderer )
 {
-	SDL_RenderCopy( renderer, texture, NULL, NULL );
-	for( auto i : components )
+	if( !hidden )
 	{
-		components[i]->render();
+		for( auto i : components )
+		{
+			components[i]->render( renderer, texture );
+		}
 	}
 }
 
 cInterface::cInterface( table luaToCpp, std::shared_ptr< table > objectTable ) :
-	rectangle( std::make_unique( new SDL_Rect ) );
-	rectangle.x( boost::any_cast< uint >( luaToCpp["screenPos.x"] ) ),
-	rectangle.y( boost::any_cast< uint >( luaToCpp["screenPos.y"] ) ),
-	rectangle.w( boost::any_cast< uint >( luaToCpp["width"] ) ),
-	rectangle.h( boost::any_cast< uint >( luaToCpp["height"] ) ),
+	renderArea( SDL_Rect() );
+	renderArea.x( boost::any_cast< uint >( luaToCpp["renderArea.x"] ) ),
+	renderArea.y( boost::any_cast< uint >( luaToCpp["renderArea.y"] ) ),
+	renderArea.w( boost::any_cast< uint >( luaToCpp["renderArea.width"] ) ),
+	renderArea.h( boost::any_cast< uint >( luaToCpp["renderArea.height"] ) ),
 {
 	auto rawLuaComponents = boost::any_cast< table >( luaToCpp["components"] )
 	for( auto i : rawLuaComponents )
