@@ -5,7 +5,6 @@
 #include <string>
 //
 #include <typedef.hpp>
-#include <position.hpp>
 #include <render/tileset.hpp>
 
 class cBlockSubtype

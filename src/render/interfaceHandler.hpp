@@ -7,7 +7,6 @@
 #include <SDL2/SDL.h>
 //
 #include <typedef.hpp>
-#include <position.hpp>
 #include <camera.hpp>
 #include <render/interface.hpp>
 

@@ -6,7 +6,6 @@
 #include <vector>
 //
 #include <typedef.hpp>
-#include <position.hpp>
 #include <block/block.hpp>
 #include <board/boardGenerator.hpp>
 

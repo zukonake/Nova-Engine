@@ -6,7 +6,6 @@
 #include <string>
 //
 #include <typedef.hpp>
-#include <position.hpp>
 #include <render/interface.hpp>
 #include <block/blockSubtype.hpp>
 

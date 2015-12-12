@@ -5,7 +5,6 @@
 #include <memory>
 //
 #include <typedef.hpp>
-#include <position.hpp>
 #include <board/board.hpp>
 #include <render/interface.hpp>
 
