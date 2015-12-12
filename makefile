@@ -5,49 +5,33 @@ RELEASE_PATH = bin/release/Nova-Game
 TARGET_PATH = $(DEBUG_PATH)
 INCLUDE_PATH = $(SOURCE_PATH)
 LIBRARY_PATH = lib/
-SOURCES = $(shell find $(SOURCE_PATH) -type f -name "*.cpp")
-define OBJS
-$(OBJ_PATH)main.o
-$(OBJ_PATH)server.o
-$(OBJ_PATH)client.o
-$(OBJ_PATH)interfaceHandler.o
-$(OBJ_PATH)camera.o
-$(OBJ_PATH)interface.o
-$(OBJ_PATH)interfaceComponent.o
-$(OBJ_PATH)entity.o
-$(OBJ_PATH)entityControl.o
-$(OBJ_PATH)entityAction.o
-$(OBJ_PATH)entitySubtype.o
-$(OBJ_PATH)board.o
-$(OBJ_PATH)boardGenerator.o
-$(OBJ_PATH)block.o
-$(OBJ_PATH)blockSubtype.o
-$(OBJ_PATH)luaWrapper.o
-$(OBJ_PATH)typedef.o
-$(OBJ_PATH)global.o
-endef
+DEPEND_PATH = build/depend
+SOURCES = $(shell find $(SOURCE_PATH) -type f -name "*.cpp" -printf '%p ')
+#STO = $(OBJ_PATH)$(shell basename -a $(SOURCES))
+OBJS = $(SOURCES:.cpp=.o)
 CXX = g++
 DEBUG = -g
 STD = -std=c++14
-LDLIBS = -liblua -libdl -lSDL2
+LDLIBS = -llua -ldl -lSDL2
 INCFLAGS = -I $(INCLUDE_PATH)
 LIBFLAGS = -L $(LIBRARY_PATH)
 CXXFLAGS = $(STD) -Wall $(LDLIBS) $(DEBUG) $(INCFLAGS) $(LIBFLAGS)
 LDFLAGS = $(STD) -Wall $(LDLIBS) $(DEBUG) $(INCFLAGS) $(LIBFLAGS)
 
-.PHONY : depend clean
+.PHONY : depend clean all
 
-all : $(TARGET_PATH)
+all : $(SOURCES) $(TARGET_PATH)
 
 $(TARGET_PATH) : $(OBJS)
-	$(CXX) $(LDFLAGS) $(OBJS) -o $(TARGET_PATH)
+	$(CXX) $(LDFLAGS) $(OBJS) -o $@
 
-.cpp.o :
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-clean :
-	$(RM) $(OBJ_PATH)*.o *~ $(TARGET_PATH)
-	mv -f makefile.bak makefile
+%.o : %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@ >> make.log
 
 depend : $(SOURCES)
-#
+	$(CXX) $(CXXFLAGS) -MM $(SOURCES) > $(DEPEND_PATH)
+
+clean :
+	$(RM) $(OBJ_PATH)*.o *~ $(TARGET_PATH) $(DEPEND_PATH)
+
+-include $(DEPEND_PATH)
