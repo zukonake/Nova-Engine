@@ -1,5 +1,5 @@
 //entity.cpp
-#include "entity.cpp"
+#include "entity.hpp"
 
 bool cEntity::move( uint targetPosX, uint targetPosY );
 {
