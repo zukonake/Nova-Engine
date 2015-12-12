@@ -19,7 +19,7 @@ class cInterface
 
 	void render( std::shared_ptr< SDL_Renderer > renderer );
 public:
-	cInterface( table luaToCpp, std::shared_ptr< table > objectList );
+	cInterface( table luaToCpp, std::shared_ptr< table > objectTable );
 	~cInterface();
 };
 
