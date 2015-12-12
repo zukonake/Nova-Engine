@@ -14,17 +14,22 @@ extern "C"
 //
 #include <typedef.hpp>
 
-class cLuaWrapper
+class cLuaWrapper //singleton
 {
 	friend class cInitializer;
+	typedef std::vector< boost::any > universalArray;
 
 	lua_state *L;
 
 	void error( std::string message );
 	table convertTable();
-	std::vector< boost::any > convertTableToArray( table* target );
+	universalArray convertTableToArray( std::unique_ptr< table > target );
 	template < typename variableType >
 	variableType convertVariable( int luaIndex );
+
+	cLuaWrapper() {};
+	void operator=( cLuaWrapper const& ) = delete;
+	cLuaWrapper( cLuaWrapper const& ) = delete;
 public:
 	template < typename variableType >
 	variableType getGlobal( std::string variableName );
@@ -32,9 +37,13 @@ public:
 	variableType runFunction( std::string functionName, std::string argument );
 	bool openScript( std::string fileName );
 
-	cLuaWrapper();
+	void initialize();
+	static cLuaWrapper& newInstance();
 	~cLuaWrapper();
 };
 
-
+/*
+Exceptions
+	> 01 - Lua error
+*/
 #endif

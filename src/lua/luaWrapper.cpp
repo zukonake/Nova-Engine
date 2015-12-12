@@ -5,6 +5,7 @@ void cLuaWrapper::error( std::string message = std::string("UNKNOWN") )
 {
 	lua_pushstring( L, message );
 	lua_error( L );
+	throw 01;
 }
 
 table cLuaWrapper::convertTable()
@@ -120,6 +121,8 @@ std::map< std::string, boost::any > cLuaWrapper::convertVariable( int luaIndex )
 {
 	if( lua_istable( L, index ) )
 	{
+
+template <>
 		return convertTable();
 	}
 	else
@@ -179,16 +182,22 @@ variableType cLuaWrapper::runFunction( std::string functionName, std::string arg
 
 bool cLuaWrapper::openScript( std::string fileName )
 {
-	if (luaL_loadfile( L, fileName ) || lua_pcall( L, 0, 0, 0 ))
+	if ( luaL_loadfile( L, fileName ) || lua_pcall( L, 0, 0, 0 ) )
 	{
 		return -1;
 	}
 }
 
-cLuaWrapper::cLuaWrapper()
+void cLuaWrapper::initialize()
 {
 	L = lua_newstate( 0, 0 );
 	luaL_openlibs( L );
+}
+
+static cLuaWrapper& cLuaWrapper::newInstance()
+{
+	static cLuaWrapper instance;
+	return instance;
 }
 
 cLuaWrapper::~cLuaWrapper()

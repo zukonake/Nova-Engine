@@ -28,12 +28,11 @@ class cServer
 	void operator=( cServer const& ) = delete;
 	cServer( cServer const& ) = delete;
 public:
-
-	static cServer& newInstance();
-
 	void initialize();
 	void connectClient( std::unique_ptr< cClient > target );
 	void work();
+
+	static cServer& newInstance();
 };
 
 #endif

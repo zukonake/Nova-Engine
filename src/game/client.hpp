@@ -20,8 +20,6 @@ class cClient
 	void render();
 	void connectServer( std::shared_ptr< table > _objectTable, std::string gameTitle = "Unnamed" );
 public:
-
-	//cClient( std::unique_ptr< table > _objectTable, uint screenWidth = 800, uint screenHeight = 640 );
 	cClient( uint screenWidth = 800, uint screenHeight = 640, std::string windowTitle = "Unnamed" );
 };
 
