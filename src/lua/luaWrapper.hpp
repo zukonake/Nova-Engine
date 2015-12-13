@@ -35,7 +35,7 @@ public:
 	variableType getGlobal( std::string variableName );
 	template < typename variableType >
 	variableType runFunction( std::string functionName, std::string argument );
-	bool openScript( std::string fileName );
+	void openScript( std::string fileName );
 
 	void initialize();
 	static cLuaWrapper& newInstance();
@@ -43,7 +43,8 @@ public:
 };
 
 /*
-Exceptions
-	> 01 - Lua error
+cLuaWrapepr exceptions:
+	> 01 - Lua error.
+	> 02 - Couldn't open script.
 */
 #endif

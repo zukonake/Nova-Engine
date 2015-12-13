@@ -4,7 +4,7 @@
 using namespace global
 {
 	workingDirectory = "../../";
-	configPath = workingDirectory + "config/";
+	configPath = "config/";
 	objectTypes = {
 		"tileset",
 		"blockSubtype",
@@ -18,7 +18,4 @@ using namespace global
 		"interfaceComponent",
 		"interface" };
 
-	screenWidth = 800;
-	screenHeight = 800;
-	windowTitle = "Nova-Engine";
 }

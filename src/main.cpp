@@ -15,15 +15,28 @@
 	https://github.com/Nevseis/Nova-Engine
 */
 #include <memory>
+#include <unistd.h>
+#include <string>
 //
 #include <game/server.hpp>
 #include <game/client.hpp>
 
+
 int main( int argc, char argv[] )
 {
-	cServer localserver = cServer::newInstance();
-	localserver.initialize();
-	localserver.connectClient( std::make_unique( new cClient() ) );
-	localserver.work(); //TODO
+	chdir( global::workingDirectory ); //Change working dir to root of project.
+	cLuaWrapper luaWrapper = cLuaWrapper::newInstance();
+
+	luaWrapper.openScript( global::configPath + "server.lua" );
+	auto datasetPath = luaWrapper.getVariable< std::string >( "dataset" );
+	cServer localserver = cServer::newInstance( datasetPath );
+	localserver.initialize( std::make_shared< cLuaWrapper >( luaWrapper ) );
+
+	luaWrapper.openScript( global::configPath + "client.lua" );
+	auto windowWidth = luaWrapper.getVariable< uint >( "windowWidth" );
+	auto windowHeight = luaWrapper.getVariable< uint >( "windowHeight" );
+	auto windowTitle = luaWrapper.getVariable< std::string >( "windowTitle" );
+	localserver.connectClient( std::make_unique< cClient >( windowWidth, windowHeight, windowTitle ) );
+	localserver.work();
 	return 0;
 }

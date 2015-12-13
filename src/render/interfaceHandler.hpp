@@ -17,12 +17,16 @@ class cInterfaceHandler
 
 	std::unique_ptr< SDL_Window > screen;
 	std::shared_ptr< SDL_Renderer > renderer;
-	std::unique_ptr< cCamera > camera;
+	std::shared_ptr< cCamera > camera;
 	std::vector< cInterface > interfaceVector;
+	std::string windowTitle;
+
+	cInterface( cInterface const& ) = delete;
+	void operator=( cInterfaceHandler const&  ) = delete;
 public:
-	render();
-	clear();
-	refresh();
+	void render();
+	void clear();
+	void refresh();
 
 	cInterfaceHandler( uint screenWidth, uint screenHeight, std::string windowTitle );
 	~cInterfaceHandler();

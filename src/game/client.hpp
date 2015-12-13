@@ -13,15 +13,16 @@ class cClient
 {
 	friend class cServer;
 
-	std::shared_ptr< table > objectTable;
+	std::shared_ptr< fixedTable > objectTable;
 	std::shared_ptr< cEntity > player;
-	cInterfaceHandler interfaceHandler;
+	std::unique_ptr< cInterfaceHandler > interfaceHandler;
+	bool running;
 
 	void work();
 	void render();
-	void connectServer( std::shared_ptr< table > _objectTable, std::string gameTitle = "Unnamed" );
+	void connectServer( std::shared_ptr< fixedTable > _objectTable, std::string gameTitle );
 public:
-	cClient( uint screenWidth = 800, uint screenHeight = 640, std::string windowTitle = "Unnamed" );
+	cClient( uint screenWidth, uint screenHeight, std::string windowTitle );
 };
 
 #endif

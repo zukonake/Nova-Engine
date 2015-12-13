@@ -180,11 +180,11 @@ variableType cLuaWrapper::runFunction( std::string functionName, std::string arg
 }
 
 
-bool cLuaWrapper::openScript( std::string fileName )
+void cLuaWrapper::openScript( std::string fileName )
 {
 	if ( luaL_loadfile( L, fileName ) || lua_pcall( L, 0, 0, 0 ) )
 	{
-		return -1;
+		throw "02";
 	}
 }
 

@@ -15,6 +15,16 @@ bool cEntity::move( uint targetPosX, uint targetPosY );
 	}
 }
 
+std::shared_ptr< cPosition > cEntity::getBoardPos()
+{
+	return std::make_shared< cPosition >( boardPos );
+}
+
+std::shared_ptr< cBoard > cEntity::getBoard()
+{
+	return cBoard;
+}
+
 cEntity::cEntity( table luaToCpp, table* objectTable ) :
 	board( boost::any_cast< cBoard* >( objectTable[ "board" ][ boost::any_cast< std::string >( luaToCpp[ "board" ] ) ] ) ),
 	subtype( boost::any_cast< cEntitySubtype >( objectTable[ "entitySubtype" ][ boost::any_cast< std::string >( luaToCpp[ "subtype" ] ) ] ) ),

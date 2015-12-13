@@ -1,18 +1,25 @@
 #include "camera.hpp"
 
-void cCamera::render( cInterface* interface, cPosition screenPos, uint fov )
+void cCamera::render( std::shared_ptr< cInterface > interface, cPosition screenPos, uint fov )
 {
 	for( uint iY = boardPos.y - fov; iY < boardPos.y + fov; iY++ )
 	{
 		for( uint iX = boardPos.x - fov; iX < boardPos.x + fov; iX++ )
 		{
 			std::shared_ptr< cBlock > block = board->getBlock( cPosition( iX, iY ) );
-			block->render( interface, screenPos );
+			if( block != std::nullptr )
+			{
+				block->render( interface, screenPos );
+			}
+			else
+			{
+				throw "03"; //Non-existent block rendered;
+			}
 		}
 	}
 }
 
-cCamera::cCamera( std::shared_ptr< cBoard > _board, cPosition _boardPos )
+cCamera::cCamera( std::shared_ptr< cBoard > _board, std::shared_ptr< cPosition > _boardPos )
 {
 	if( _board != std::nullptr )
 	{
@@ -24,6 +31,19 @@ cCamera::cCamera( std::shared_ptr< cBoard > _board, cPosition _boardPos )
 	}
 	else
 	{
-		throw 01; //Invalid board pointer.
+		throw "01"; //Invalid board pointer.
+	}
+}
+
+cCamera::cCamera( std::shared_ptr< cEntity > wrapTarget )
+{
+	if( wrapTarget != std::nullptr )
+	{
+		boardPos = wrapTarget->getBoardPos();
+		board = wrapTarget->getBoard();
+	}
+	else
+	{
+		throw "02"; //Invalid wrapTarget pointer.
 	}
 }
