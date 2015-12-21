@@ -34,8 +34,7 @@ public:
 	void connectClient( std::unique_ptr< cClient > target );
 	void work();
 	std::shared_ptr< cBoard > getBoard( uint id );
-	std::shared_ptr< cEntity > getEntity( std::string name );
-	std::shared_ptr< cClient > getClient( std::string name );
+	std::shared_ptr< cEntity > getEntity( uint id );
 
 	static cServer& newInstance( std::string _datasetName );
 };
