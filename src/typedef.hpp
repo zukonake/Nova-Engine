@@ -8,7 +8,7 @@
 #include <cstdint>
 
 typedef std::map< std::string, boost::any > table;
-typedef std::map< std::string, std::map< std::string, boost::any > > fixedTable;
+typedef std::map< std::string, table > fixedTable;
 typedef uint16_t uint;
 struct cPosition
 {
