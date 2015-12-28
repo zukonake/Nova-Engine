@@ -17,7 +17,8 @@ void cClient::connectServer( std::shared_ptr< fixedTable > _objectTable, std::st
 	interfaceHandler->windowTitle = windowTitle;
 }
 
-cClient::cClient( uint screenWidth = 800, uint screenHeight = 640, std::string windowTitle = "Unnamed" )
+cClient::cClient( uint screenWidth = 800, uint screenHeight = 640, std::string windowTitle = "Unnamed", std::shared_ptr< cEntity > _player ) :
+	player( _player )
 {
 	interfaceHandler = std::make_unique< cInterfaceHandler >( screenWidth, screenHeight, windowTitle );
 }

@@ -40,6 +40,16 @@ void cServer:connectClient( std::shared_ptr< cClient > target )
 	clients.push_back( target );
 }
 
+std::shared_ptr< cBoard > cServer::getBoard( uint id )
+{
+	return entities[ id ];
+}
+
+std::shared_ptr< cEntity > cServer::getEntity( uint id )
+{
+	return entities[ id ];
+}
+
 static cServer& cServer::newInstance( std::string _datasetName )
 {
 	datasetName = _datasetName;
