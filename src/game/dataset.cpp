@@ -1,7 +1,7 @@
 //dataset.cpp
-#include "dataset.hpp"
 #include <cassert>
 //
+#include "dataset.hpp"
 #include <global.hpp>
 
 cDataset::cDataset( std::string path, std::shared_ptr< cLuaWrapper > luaWrapper )Tileset
