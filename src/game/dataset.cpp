@@ -1,8 +1,10 @@
 //dataset.cpp
 #include "dataset.hpp"
+#include <cassert>
+//
 #include <global.hpp>
 
-cDataset::cDataset( std::string path, std::shared_ptr< cLuaWrapper > luaWrapper )
+cDataset::cDataset( std::string path, std::shared_ptr< cLuaWrapper > luaWrapper )Tileset
 {
 	objectTable[ "tileset" ] = table();
 	objectTable[ "blockSubtype" ] = table();
@@ -27,48 +29,54 @@ cDataset::cDataset( std::string path, std::shared_ptr< cLuaWrapper > luaWrapper 
 			table luaToCpp = luaWrapper->getGlobal< table >( tableName );
 			if( global::objectsToLoad[ i ] == "tileset" )
 			{
-				objectTable[ "tileset" ][ tableName ] = std::make_shared< cTileset >( luaToCpp, &objectTable );
+				objectTable[ "tileset" ].emplace( tablename, cTileset( luaToCpp, &objectTable ) );
 			}
 			else if( global::objectsToLoad[ i ] == "blockSubtype" )
 			{
-				objectTable[ "blockSubtype" ][ tableName ] = std::make_shared< cBlockSubtype >( luaToCpp, &objectTable );
+				objectTable[ "blockSubtype" ].emplace( tablename, cBlockSubtype( luaToCpp, &objectTable ) );
 			}
 			else if( global::objectsToLoad[ i ] == "block" )
 			{
-				objectTable[ "block" ][ tableName ] = std::make_shared< cBlock >( luaToCpp, &objectTable );
+				objectTable[ "block" ].emplace( tablename, cBlock( luaToCpp, &objectTable ) );
 			}
 			else if( global::objectsToLoad[ i ] == "boardGenerator" )
 			{
-				objectTable[ "boardGenerator" ][ tableName ] = std::make_shared< cBoardGenerator >( luaToCpp, &objectTable );
+				objectTable[ "boardGenerator" ].emplace( tablename, cBoardGenerator( luaToCpp, &objectTable ) );
 			}
 			else if( global::objectsToLoad[ i ] == "board" )
 			{
-				objectTable[ "board" ][ tableName ] = std::make_shared< cBoard >( luaToCpp, &objectTable );
+				objectTable[ "board" ].emplace( tablename, cBoard( luaToCpp, &objectTable ) );
 			}
 			else if( global::objectsToLoad[ i ] == "entitySubtype" )
 			{
-				objectTable[ "entitySubtype" ][ tableName ] = std::make_shared< cEntitySubtype >( luaToCpp, &objectTable );
+				objectTable[ "entitySubtype" ].emplace( tablename, cEntitySubtype( luaToCpp, &objectTable ) );
 			}
 			else if( global::objectsToLoad[ i ] == "entityAction" )
 			{
-				objectTable[ "entityAction" ][ tableName ] = std::make_shared< cEntityAction >( luaToCpp, &objectTable );
+				objectTable[ "entityAction" ].emplace( tablename, cEntityAction( luaToCpp, &objectTable ) );
 			}
 			else if( global::objectsToLoad[ i ] == "entityControl" )
 			{
-				objectTable[ "entityControl" ][ tableName ] = std::make_shared< cEntityControl >( luaToCpp, &objectTable );
+				objectTable[ "entityControl" ].emplace( tablename, cEntityControl( luaToCpp, &objectTable ) );
 			}
 			else if( global::objectsToLoad[ i ] == "entity" )
 			{
-				objectTable[ "entity" ][ tableName ] = std::make_shared< cEntity >( luaToCpp, &objectTable );
+				objectTable[ "entity" ].emplace( tablename, cEntity( luaToCpp, &objectTable ) );
 			}
 			else if( global::objectsToLoad[ i ] == "interfaceComponent" )
 			{
-				objectTable[ "interfaceComponent" ][ tableName ] = std::make_shared< cInterfaceComponent >( luaToCpp, &objectTable );
+				objectTable[ "interfaceComponent" ].emplace( tablename, cInterfaceComponent( luaToCpp, &objectTable ) );
 			}
 			else if( global::objectsToLoad[ i ] == "interface" )
 			{
-				objectTable[ "interface" ][ tableName ] = std::make_shared< cInterface >( luaToCpp, &objectTable );
+				objectTable[ "interface" ].emplace( tablename, cInterface( luaToCpp, &objectTable ) );
 			}
 		}
 	}
+}
+
+table& operator[]( const std::string key )
+{
+	assert( objectTable.find( key ) != objectTable.end() ); //Assert that the key exists.
+	return objectTable;
 }

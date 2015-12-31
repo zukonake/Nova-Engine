@@ -11,7 +11,9 @@
 class cDataset
 {
 	fixedTable objectTable;
+public:
 	cDataset( std::string path, std::shared_ptr< cLuaWrapper > luaWrapper );
+	table& operator[]( const std::string key );
 };
 
 #endif

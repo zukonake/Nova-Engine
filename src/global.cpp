@@ -4,7 +4,7 @@
 using namespace global
 {
 	workingDirectory = "../../";
-	configPath = workingDirectory .. "config/";
+	configPath = "config/";
 	objectTypes = {
 		"tileset",
 		"blockSubtype",
