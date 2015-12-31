@@ -28,7 +28,7 @@ int main( int argc, char argv[] )
 	cLuaWrapper luaWrapper = cLuaWrapper::newInstance();
 
 	luaWrapper.openScript( global::configPath + "server.lua" );
-	auto datasetPath = luaWrapper.getVariable< std::string >( "dataset" );
+	cDataset dataset = cDataset( luaWrapper.getVariable< std::string >( "dataset" ), luaWrapper );
 	cServer localserver = cServer::newInstance( datasetPath );
 	localserver.initialize( std::make_shared< cLuaWrapper >( luaWrapper ) );
 

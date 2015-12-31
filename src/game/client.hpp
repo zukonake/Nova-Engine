@@ -21,6 +21,7 @@ class cClient
 	void work();
 	void render();
 	void connectServer( std::shared_ptr< fixedTable > _objectTable, std::string gameTitle );
+	void disconnectServer();
 public:
 	cClient( uint screenWidth, uint screenHeight, std::string windowTitle, std::shared_ptr< cEntity > _player );
 };

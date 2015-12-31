@@ -1,5 +1,7 @@
 //server.cpp
-
+#include <cassert>
+#include <algorithm>
+//
 #include "server.hpp"
 #include <render/tileset.hpp>
 #include <block/blockSubtype.hpp>
@@ -13,11 +15,6 @@
 #include <render/interfaceComponent.hpp>
 #include <render/interface.hpp>
 
-void cServer::initializeObjects( std::shared_ptr< cLuaWrapper > luaWrapper )
-{
-	
-}
-
 void cServer::work()
 {
 	while( running )
@@ -29,23 +26,26 @@ void cServer::work()
 	return 0;
 }
 
-void cServer::initialize( std::shared_ptr< cLuaWrapper > luaWrapper )
+void cServer::connectClient( std::shared_ptr< cClient > target )
 {
-	initializeObjects( luaWrapper );
-}
-
-void cServer:connectClient( std::shared_ptr< cClient > target )
-{
-	target->connectServer( objectTable );
+	target->connectServer( dataset );
 	clients.push_back( target );
 }
 
-std::shared_ptr< cBoard > cServer::getBoard( uint id )
+void cServer::disconnectClient( std::shared_ptr< cClient > target )
+{
+	auto iterator = std::find( clients.begin(), clients.end(), target );
+	assert( iterator != clients.end() ); //Assert that the client is connected
+	clients[ iterator ]->disconnectServer();
+	clients.erase( iterator );
+}
+
+std::shared_ptr< cBoard > cServer::getBoard( uint index )
 {
 	return entities[ id ];
 }
 
-std::shared_ptr< cEntity > cServer::getEntity( uint id )
+std::shared_ptr< cEntity > cServer::getEntity( uint index )
 {
 	return entities[ id ];
 }

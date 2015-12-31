@@ -17,24 +17,22 @@ class cServer
 	typedef std::vector< std::shared_ptr< cBoard > > boardVector;
 
 	bool running;
-	fixedTable objectTable;
+	cDataset dataset;
 	std::string gameTitle;
 	std::string datasetName;
 	boardVector boards;
 	entityVector entities;
 	clientVector clients;
 
-	void initializeObjects();
-
 	cGame() {};
 	void operator=( cServer const& ) = delete;
 	cServer( cServer const& ) = delete;
 public:
-	void initialize( std::shared_ptr< cLuaWrapper > luaWrapper );
-	void connectClient( std::unique_ptr< cClient > target );
+	void connectClient( std::shared_ptr< cClient > target );
+	void disconnectClient( std::shared_ptr< cClient > target );
 	void work();
-	std::shared_ptr< cBoard > getBoard( uint id );
-	std::shared_ptr< cEntity > getEntity( uint id );
+	std::shared_ptr< cBoard > getBoard( uint index );
+	std::shared_ptr< cEntity > getEntity( uint index );
 
 	static cServer& newInstance( std::string _datasetName );
 };
