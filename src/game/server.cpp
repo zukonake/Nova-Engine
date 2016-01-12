@@ -40,19 +40,8 @@ void cServer::disconnectClient( std::shared_ptr< cClient > target )
 	clients.erase( iterator );
 }
 
-std::shared_ptr< cBoard > cServer::getBoard( uint index )
+cServer::cServer( std::string _datasetName )
+	datasetName( _datasetName)
 {
-	return entities[ id ];
-}
 
-std::shared_ptr< cEntity > cServer::getEntity( uint index )
-{
-	return entities[ id ];
-}
-
-static cServer& cServer::newInstance( std::string _datasetName )
-{
-	datasetName = _datasetName;
-	static cGame instance;
-	return instance;
 }
