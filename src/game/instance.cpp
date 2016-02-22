@@ -7,7 +7,7 @@ int getEntityIndex( std::shared_ptr< cEntity > target )
 {
 	auto index = std::find( entities.begin(), entities.end(), target );
 	cassert( entities.size() - 1 >= index && index >= 0 );
-	if( 
+	return index;
 }
 
 std::shared_ptr< cEntity > cInstance::getEntity( uint index )
@@ -16,21 +16,9 @@ std::shared_ptr< cEntity > cInstance::getEntity( uint index )
 	return entities[ index ];
 }
 
-std::shared_ptr< cBoard > cInstance::getBoard( uint index )
-{	
-	assert( boards.size() - 1 >= index && index >= 0 );
-	return boards[ index ];
-}
-
 void cInstance::addEntity( std::shared_ptr< cEntity > target )
 {
 	entities.push_back( target );
-	return;
-}
-
-void cInstance::addBoard( std::shared_ptr< cBoard > target )
-{
-	boards.push_back( target );
 	return;
 }
 
@@ -43,16 +31,12 @@ void cInstance::removeEntity( uint index )
 
 void cInstance::removeEntity( std::shared_ptr< cEntity > target )
 {
-	int* index = std::find( entities.begin(), entities.end(), target );
-	
+	int index = std::find( entities.begin(), entities.end(), target );
+	removeEntity( index );
 }
 
-void cInstance::removeBoard( uint index )
+cInstance::cInstance( std::shared_ptr< cBoard > _board ) :
+	board( _board )
 {
-	
-}
 
-void cInstance::removeBoard( std::shared_ptr< cBoard > target )
-{
-	
 }
