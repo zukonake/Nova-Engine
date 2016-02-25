@@ -10,8 +10,8 @@
 class cBlockSubtype
 {
 	friend class cBlock;
-	friend class cGame::initializeObjects();
-	friend class cCamera::render();
+	friend class cGame;
+	friend class cCamera;
 	std::string name;
 	bool isPassable;
 	cTileset* tileset;

@@ -12,8 +12,8 @@
 class cBlock
 {
 	friend class cBoard;
-	friend class cGame::initializeObjects();
-	friend class cCamera::render();
+	friend class cGame;
+	friend class cCamera;
 	cBlockSubtype* subtype;
 	void render( cInterface* interface, cPosition pos );
 	cBlock( cBlockSubtype* _subtype );

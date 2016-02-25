@@ -17,7 +17,7 @@ class cInterfaceComponent
 
 	void render( std::shared_ptr< SDL_Renderer > renderer, std::shared_ptr< SDL_Texture > texture );
 
-	cInterfaceComponent::cInterfaceComponent( table luaToCpp, std::shared_ptr< table > objectTable );
+	cInterfaceComponent( table luaToCpp, std::shared_ptr< table > objectTable );
 };
 
 #endif

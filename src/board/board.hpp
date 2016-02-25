@@ -12,7 +12,7 @@
 class cBoard
 {
 	friend class cEntity;
-	friend class cGame::initializeObjects();
+	friend class cGame;
 	std::vector < cBlock* > blockVector;
 	cBoardGenerator* generator;
 	std::string name;
