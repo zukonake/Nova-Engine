@@ -5,13 +5,16 @@
 #include <memory>
 //
 #include <typedef.hpp>
-#include <tile.hpp>
+#include <render/tile.hpp>
 
 class cEntitySubtype
 {
 	//TODO tileset
 	table componentTable;
-	cEntitySubtype( std::shared_ptr< cTile > _tile );
+	cPosition tilesetPos;
+	cTileset* tileset;
+	cEntitySubtype( table luaToCpp );
 };
 
 #endif
+
