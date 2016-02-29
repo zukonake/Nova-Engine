@@ -15,7 +15,7 @@ class cCamera
 	std::shared_ptr< cBoard > board;
 public:
 	void render( std::shared_ptr< cInterface > interface, cPosition screenPos, uint fov );
-	cCamera( std::shared_ptr< cBoard > _board, std::shared_ptr< cPosition > _boardPos );
+	cCamera( std::shared_ptr< cBoard > _board, std::shared_ptr< cPosition_boardPos );
 	cCamera( std::shared_ptr< cEntity > wrapTarget );
 };
 

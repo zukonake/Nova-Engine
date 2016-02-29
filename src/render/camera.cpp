@@ -2,12 +2,12 @@
 
 void cCamera::render( std::shared_ptr< cInterface > interface, cPosition screenPos, uint fov )
 {
-	for( uint iY = boardPos.y - fov; iY < boardPos.y + fov; iY++ )
+	for( uint iY = boardPos->y - fov; iY < boardPos->y + fov; iY++ )
 	{
-		for( uint iX = boardPos.x - fov; iX < boardPos.x + fov; iX++ )
+		for( uint iX = boardPos->x - fov; iX < boardPos->x + fov; iX++ )
 		{
 			std::shared_ptr< cBlock > block = board->getBlock( cPosition( iX, iY ) );
-			if( block != std::nullptr )
+			if( block != std::shared_ptr< cBlock >() )
 			{
 				block->render( interface, screenPos );
 			}
@@ -21,7 +21,7 @@ void cCamera::render( std::shared_ptr< cInterface > interface, cPosition screenP
 
 cCamera::cCamera( std::shared_ptr< cBoard > _board, std::shared_ptr< cPosition > _boardPos )
 {
-	if( _board != std::nullptr )
+	if( _board != std::shared_ptr< cBoard >() )
 	{
 		if( _board->canTeleport( boardPos ) )
 		{
@@ -37,7 +37,7 @@ cCamera::cCamera( std::shared_ptr< cBoard > _board, std::shared_ptr< cPosition >
 
 cCamera::cCamera( std::shared_ptr< cEntity > wrapTarget )
 {
-	if( wrapTarget != std::nullptr )
+	if( wrapTarget != std::std::shared_ptr< cCamera >() )
 	{
 		boardPos = wrapTarget->getBoardPos();
 		board = wrapTarget->getBoard();

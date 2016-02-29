@@ -5,7 +5,7 @@
 #include <memory>
 //
 #include <typedef.hpp>
-#include <render/tile.hpp>
+#include <render/tileset.hpp>
 
 class cEntitySubtype
 {

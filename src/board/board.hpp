@@ -13,16 +13,21 @@ class cBoard
 {
 	friend class cEntity;
 	friend class cGame;
-	std::vector < cBlock* > blockVector;
-	cBoardGenerator* generator;
+
+	typedef std::vector < std::shared_ptr< cBlock > > blockVector;
+
+	blockVector blocks;
+	std::shared_ptr< cBoardGenerator > generator;
 	std::string name;
 	uint height;
 	uint width;
+	void generate();
 public:
-	bool canTeleport( cPosition targetPos );
+	bool canTeleport( const cPosition& targetPos );
+	std::shared_ptr< cBlock > getBlock( cPosition targetPosition );
 private:
-	cBoard( std::vector< cBlock* > _blockVector, cBoardGenerator* _generator, std::string _name, uint _height, uint _width);
-	cBoard( table luaToCpp, table* objectTable );
+	cBoard( blockVector _blocks, std::shared_ptr< cBoardGenerator > _generator, std::string _name, uint _height, uint _width);
+	cBoard( table luaToCpp, std::shared_ptr< table > objectTable );
 };
 
 #endif
