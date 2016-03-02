@@ -1,12 +1,12 @@
 //tileset.cpp
 #include "tileset.hpp"
 
-void cTileset::renderRect( SDL_Rect* sRectangle, SDL_Rect* dRectangle, SDL_Renderer* renderer )
+void cTileset::renderRect( std::shared_ptr< SDL_Rect > sRectangle, std::shared_ptr< SDL_Rect > dRectangle, std::shared_ptr< SDL_Renderer > renderer )
 {
-	SDL_RenderCopy( renderer, texture, sRectangle, dRectangle );
+	SDL_RenderCopy( renderer.get(), texture.get(), sRectangle.get(), dRectangle.get() );
 }
 
-cTileset::cTileset( SDL_Texture* _texture ) :
+cTileset::cTileset( std:shared_ptr< SDL_Texture > _texture ) :
 	texture( _texture )
 {
 

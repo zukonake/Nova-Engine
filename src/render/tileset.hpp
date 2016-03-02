@@ -7,10 +7,10 @@
 
 class cTileset
 {
-	SDL_Texture* texture;
+	std::shared_ptr< SDL_Texture > texture;
 public:
-	void renderRect( SDL_Rect* rectangle, SDL_Renderer* renderer );
-	cTileset( SDL_Texture* _texture );
+	void renderRect( std::shared_ptr< SDL_Rect > sRectangle, std::shared_ptr< SDL_Rect > dRectangle, std::shared_ptr< SDL_Renderer > renderer );
+	cTileset( std::shared_ptr< SDL_Texture > _texture );
 };
 
 #endif

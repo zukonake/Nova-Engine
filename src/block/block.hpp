@@ -6,6 +6,7 @@
 #include <string>
 //
 #include <typedef.hpp>
+#include <render/tileset.hpp>
 #include <render/interface.hpp>
 #include <block/blockSubtype.hpp>
 
