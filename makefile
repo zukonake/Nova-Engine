@@ -33,6 +33,6 @@ depend : $(SOURCES)
 	$(CXX) $(CXXFLAGS) -MM $(SOURCES) > $(DEPEND_PATH)
 
 clean :
-	$(RM) $(OBJ_PATH)*.o *~ $(TARGET_PATH) $(DEPEND_PATH)
+	$(RM) $(OBJS) *~ $(TARGET_PATH) $(DEPEND_PATH)
 
 -include $(DEPEND_PATH)
